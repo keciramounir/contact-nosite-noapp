@@ -1,0 +1,3870 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annuaire Algérie - Restaurants, Industries & Boutiques</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styles -->
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary: #8b5cf6;
+      --primary-hover: #a78bfa;
+      --primary-rgb: 139, 92, 246;
+      --secondary: #06b6d4;
+      --secondary-hover: #22d3ee;
+      --accent: #f43f5e;
+      --accent-hover: #fb7185;
+      
+      --brand-fb: #1877f2;
+      --brand-ig: #e1306c;
+      --brand-wa: #25d366;
+      --brand-tg: #0088cc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient background glows */
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--primary-rgb), 0.15) 0%, rgba(0,0,0,0) 70%);
+      top: -100px;
+      left: -100px;
+      z-index: -1;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+    
+    .glow-2 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0,0,0,0) 70%);
+      bottom: 100px;
+      right: -200px;
+      z-index: -1;
+      pointer-events: none;
+      filter: blur(100px);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-hover);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(139, 92, 246, 0.1); }
+      100% { transform: scale(1.03); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, var(--primary-hover) 70%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 350;
+    }
+
+    /* Stats Dashboard */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--primary-rgb), 0.3);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 0 15px rgba(var(--primary-rgb), 0.1);
+    }
+
+    .stat-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 1.5rem;
+    }
+
+    .stat-card:nth-child(1) .stat-icon { color: var(--primary-hover); background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); }
+    .stat-card:nth-child(2) .stat-icon { color: var(--secondary); background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.2); }
+    .stat-card:nth-child(3) .stat-icon { color: var(--accent-hover); background: rgba(244, 63, 94, 0.1); border-color: rgba(244, 63, 94, 0.2); }
+
+    .stat-info {
+      flex: 1;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    /* Filters / Tabs Navigation */
+    .controls-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .controls-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    /* Tabs buttons */
+    .tabs-nav {
+      display: flex;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.65rem 1.25rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+    }
+
+    /* Search and inputs */
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 450px;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+    }
+
+    .controls-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.25rem;
+    }
+
+    .table-info-summary {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .table-info-summary span {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-action.btn-primary-action {
+      background: var(--primary);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .btn-action.btn-primary-action:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+    }
+
+    /* Responsive Table Container */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    /* Table styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0, 0, 0, 0.2);
+      color: var(--text-main);
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1.15rem 1.25rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 1.1rem 1.25rem;
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      vertical-align: middle;
+      transition: background-color 0.15s ease;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr {
+      transition: background-color 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.015);
+    }
+
+    /* Table Column Widths & Alignments */
+    .col-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+    
+    .col-email {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--secondary-hover);
+    }
+
+    /* Custom Badge/Chips */
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.2);
+    }
+
+    .social-btn.fb:hover { background-color: var(--brand-fb); border-color: transparent; }
+    .social-btn.ig:hover { background-color: var(--brand-ig); border-color: transparent; }
+    .social-btn.wa:hover { background-color: var(--brand-wa); border-color: transparent; }
+    .social-btn.tg:hover { background-color: var(--brand-tg); border-color: transparent; }
+
+    .social-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .social-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .phone-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .phone-link:hover {
+      color: var(--brand-wa);
+      background: rgba(37, 211, 102, 0.08);
+      border-color: rgba(37, 211, 102, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .phone-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .email-link:hover {
+      color: var(--secondary-hover);
+    }
+
+    .email-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Empty state */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-state svg {
+      width: 64px;
+      height: 64px;
+      stroke: currentColor;
+      margin-bottom: 1.5rem;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Pagination controls */
+    .pagination-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .rows-per-page {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .rows-per-page select {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.35rem 0.5rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .rows-per-page select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .page-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .page-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .page-btn.active {
+      background: var(--primary);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer p a {
+      color: var(--primary-hover);
+      text-decoration: none;
+    }
+
+    footer p a:hover {
+      text-decoration: underline;
+    }
+
+    /* CARD GRID FOR MOBILE SCREEN REPLACEMENT */
+    .mobile-cards-grid {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      background: transparent;
+    }
+
+    .mobile-card {
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .mobile-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 0.75rem;
+    }
+
+    .mobile-card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .mobile-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+    }
+
+    .mobile-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    /* Responsive View Adjustment */
+    @media (max-width: 900px) {
+      .table-container table {
+        display: none; /* Hide real table */
+      }
+      
+      .mobile-cards-grid {
+        display: grid; /* Show mobile cards instead */
+      }
+
+      .table-container {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .subtitle {
+        font-size: 0.95rem;
+      }
+      .controls-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .tabs-nav {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .search-box {
+        max-width: 100%;
+        min-width: 100%;
+      }
+      .controls-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .action-buttons {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .btn-action {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient BG glows -->
+  <div class="glow"></div>
+  <div class="glow-2"></div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="badge">
+        <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        Aucun Site Web • Aucune Application
+      </div>
+      <h1>Annuaire Professionnel Algérie</h1>
+      <p class="subtitle">Base de données complète regroupant 300 restaurants, entreprises industrielles et boutiques locales avec présence sur les réseaux sociaux.</p>
+    </header>
+
+    <!-- Stats Panel -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🍴</div>
+        <div class="stat-info">
+          <div class="stat-value" id="count-restaurants">100</div>
+          <div class="stat-label">Restaurants</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏭</div>
+        <div class="stat-info">
+          <div class="stat-value" id="count-companies">100</div>
+          <div class="stat-label">Entreprises Industrielles</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🛍️</div>
+        <div class="stat-info">
+          <div class="stat-value" id="count-boutiques">100</div>
+          <div class="stat-label">Boutiques & Magasins</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Table UI -->
+    <section>
+      
+      <!-- Controls Panel -->
+      <div class="controls-wrapper">
+        <div class="controls-top">
+          <!-- Tab Buttons navigation -->
+          <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchCategory('restaurants')" id="tab-restaurants">
+              🍴 Restaurants
+            </button>
+            <button class="tab-btn" onclick="switchCategory('companies')" id="tab-companies">
+              🏭 Industries
+            </button>
+            <button class="tab-btn" onclick="switchCategory('boutiques')" id="tab-boutiques">
+              🛍️ Boutiques
+            </button>
+          </div>
+
+          <!-- Search Input box -->
+          <div class="search-box">
+            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" class="search-input" id="search-query" placeholder="Rechercher par nom, email, téléphone..." oninput="handleSearch(this.value)">
+          </div>
+        </div>
+
+        <div class="controls-bottom">
+          <div class="table-info-summary" id="table-stats-summary">
+            Affichage de <span>1 - 10</span> sur <span>100</span> entrées filtrées
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-action" onclick="copyTSV()">
+              <svg style="width: 14px; height: 14px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+              </svg>
+              Copier TSV
+            </button>
+            <button class="btn-action btn-primary-action" onclick="downloadCSV()">
+              <svg style="width: 14px; height: 14px; fill: none; stroke: currentColor;" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+              Télécharger CSV
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Container -->
+      <div class="table-container">
+        
+        <!-- Standard Desktop Table -->
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Nom</th>
+              <th style="width: 25%;">Email</th>
+              <th style="width: 18%;">Téléphone</th>
+              <th style="width: 32%; text-align: center;">Présence Sociale</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+
+        <!-- Mobile Responsive Grid (Hidden on desktop) -->
+        <div class="mobile-cards-grid" id="mobile-cards-container">
+          <!-- Dynamically populated cards -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h3>Aucun résultat trouvé</h3>
+          <p>Essayez de modifier votre recherche ou de changer de catégorie.</p>
+        </div>
+
+      </div>
+
+      <!-- Pagination Footer area -->
+      <div class="pagination-wrapper">
+        <div class="rows-per-page">
+          Afficher
+          <select id="rows-per-page-select" onchange="changeRowsPerPage(this.value)">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          par page
+        </div>
+
+        <div class="pagination" id="pagination-controls">
+          <!-- Dynamic pagination buttons -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Annuaire Professionnel Algérie. Fiches d'entreprises fictives à usage de démonstration.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Généré avec élégance et dynamisme.</p>
+    </footer>
+
+  </div>
+
+  <!-- Embed data directly in JavaScript script tag -->
+  <script>
+    const database = {
+  "restaurants": [
+    {
+      "Nom du restaurant": "Restaurant El Bahdja",
+      "Facebook": "https://facebook.com/elbahdja.dz",
+      "Instagram": "https://instagram.com/elbahdja_dz",
+      "WhatsApp": "+213 5 50 12 34 56",
+      "Telegram": "https://t.me/elbahdja",
+      "Email": "contact@elbahdja.dz",
+      "Téléphone": "+213 5 50 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Restaurant Le Cèdre",
+      "Facebook": "https://facebook.com/restau.lecedre",
+      "Instagram": "https://instagram.com/lecedre_resto",
+      "WhatsApp": "+213 6 61 23 45 67",
+      "Telegram": "https://t.me/lecedre",
+      "Email": "lecedre@yahoo.dz",
+      "Téléphone": "+213 6 61 23 45 67"
+    },
+    {
+      "Nom du restaurant": "La Trattoria D’Alger",
+      "Facebook": "https://facebook.com/trattoria.alger",
+      "Instagram": "https://instagram.com/trattoria_alger",
+      "WhatsApp": "+213 7 72 34 56 78",
+      "Telegram": "https://t.me/trattoria_dz",
+      "Email": "trattoria@gmail.com",
+      "Téléphone": "+213 7 72 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Grillade Saphir",
+      "Facebook": "https://facebook.com/grillade.saphir",
+      "Instagram": "https://instagram.com/saphir_grill",
+      "WhatsApp": "+213 5 51 45 67 89",
+      "Telegram": "https://t.me/saphirgrill",
+      "Email": "saphir@hotmail.dz",
+      "Téléphone": "+213 5 51 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Saveurs du Sud",
+      "Facebook": "https://facebook.com/saveursdusud.dz",
+      "Instagram": "https://instagram.com/saveurs_du_sud",
+      "WhatsApp": "+213 6 62 56 78 90",
+      "Telegram": "https://t.me/saveursdusud",
+      "Email": "info@saveursdusud.dz",
+      "Téléphone": "+213 6 62 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Dar D’Jaj",
+      "Facebook": "https://facebook.com/dardjaj",
+      "Instagram": "https://instagram.com/dar_djaj",
+      "WhatsApp": "+213 7 73 67 89 01",
+      "Telegram": "https://t.me/dardjaj",
+      "Email": "dardjaj@outlook.dz",
+      "Téléphone": "+213 7 73 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Le Gourmet Algérien",
+      "Facebook": "https://facebook.com/gourmet.dz",
+      "Instagram": "https://instagram.com/gourmet_algerien",
+      "WhatsApp": "+213 5 52 78 90 12",
+      "Telegram": "https://t.me/gourmetdz",
+      "Email": "gourmet@live.fr",
+      "Téléphone": "+213 5 52 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Pizza Etoile",
+      "Facebook": "https://facebook.com/pizza.etoile",
+      "Instagram": "https://instagram.com/pizza_etoile_dz",
+      "WhatsApp": "+213 6 63 89 01 23",
+      "Telegram": "https://t.me/pizzaetoile",
+      "Email": "pizza.etoile@yahoo.dz",
+      "Téléphone": "+213 6 63 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Couscous Royal",
+      "Facebook": "https://facebook.com/couscous.royal",
+      "Instagram": "https://instagram.com/couscousroyal_dz",
+      "WhatsApp": "+213 7 74 90 12 34",
+      "Telegram": "https://t.me/couscousroyal",
+      "Email": "couscousroyal@gmail.com",
+      "Téléphone": "+213 7 74 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Djenina",
+      "Facebook": "https://facebook.com/eldjenina.resto",
+      "Instagram": "https://instagram.com/eldjenina_dz",
+      "WhatsApp": "+213 5 53 01 23 45",
+      "Telegram": "https://t.me/eldjenina",
+      "Email": "djenina@hotmail.com",
+      "Téléphone": "+213 5 53 01 23 45"
+    },
+    {
+      "Nom du restaurant": "Fast Food Le Wouroud",
+      "Facebook": "https://facebook.com/wouroud.fastfood",
+      "Instagram": "https://instagram.com/wouroud_dz",
+      "WhatsApp": "+213 6 64 12 34 56",
+      "Telegram": "https://t.me/wouroud",
+      "Email": "wouroud@gmail.com",
+      "Téléphone": "+213 6 64 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Les Délices d’Oran",
+      "Facebook": "https://facebook.com/delices.oran",
+      "Instagram": "https://instagram.com/delices_oranais",
+      "WhatsApp": "+213 7 75 23 45 67",
+      "Telegram": "https://t.me/delicesoran",
+      "Email": "delicesoran@yahoo.fr",
+      "Téléphone": "+213 7 75 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Restaurant Le Phare",
+      "Facebook": "https://facebook.com/lephare.resto",
+      "Instagram": "https://instagram.com/lephare_alger",
+      "WhatsApp": "+213 5 54 34 56 78",
+      "Telegram": "https://t.me/lephareresto",
+      "Email": "lephare@live.dz",
+      "Téléphone": "+213 5 54 34 56 78"
+    },
+    {
+      "Nom du restaurant": "La Casa Mia",
+      "Facebook": "https://facebook.com/lacasamia.alger",
+      "Instagram": "https://instagram.com/casamia_dz",
+      "WhatsApp": "+213 6 65 45 67 89",
+      "Telegram": "https://t.me/casamia_dz",
+      "Email": "casamia@gmail.com",
+      "Téléphone": "+213 6 65 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Chez Mourad",
+      "Facebook": "https://facebook.com/chez.mourad.dz",
+      "Instagram": "https://instagram.com/chezmourad_",
+      "WhatsApp": "+213 7 76 56 78 90",
+      "Telegram": "https://t.me/chezmourad",
+      "Email": "contact@chezmourad.dz",
+      "Téléphone": "+213 7 76 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Sidi Fredj Saveurs",
+      "Facebook": "https://facebook.com/sidifredj.resto",
+      "Instagram": "https://instagram.com/sidifredj_saveurs",
+      "WhatsApp": "+213 5 55 67 89 01",
+      "Telegram": "https://t.me/sidifredj",
+      "Email": "sidifredj@yahoo.dz",
+      "Téléphone": "+213 5 55 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Pizza Capri",
+      "Facebook": "https://facebook.com/pizza.capri.dz",
+      "Instagram": "https://instagram.com/pizzacapri_dz",
+      "WhatsApp": "+213 6 66 78 90 12",
+      "Telegram": "https://t.me/pizzacapri",
+      "Email": "capri.pizza@hotmail.com",
+      "Téléphone": "+213 6 66 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Le Petit Pêcheur",
+      "Facebook": "https://facebook.com/petitpecheur.dz",
+      "Instagram": "https://instagram.com/petit_pecheur_dz",
+      "WhatsApp": "+213 7 77 89 01 23",
+      "Telegram": "https://t.me/petitpecheur",
+      "Email": "pecheur@gmail.com",
+      "Téléphone": "+213 7 77 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Andalouss",
+      "Facebook": "https://facebook.com/elandalouss.dz",
+      "Instagram": "https://instagram.com/el_andalouss_",
+      "WhatsApp": "+213 5 56 90 12 34",
+      "Telegram": "https://t.me/elandalouss",
+      "Email": "andalouss@live.fr",
+      "Téléphone": "+213 5 56 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Dar El Fellah",
+      "Facebook": "https://facebook.com/darelfellah",
+      "Instagram": "https://instagram.com/dar_elfellah",
+      "WhatsApp": "+213 6 67 01 23 45",
+      "Telegram": "https://t.me/darelfellah",
+      "Email": "fellah@outlook.dz",
+      "Téléphone": "+213 6 67 01 23 45"
+    },
+    {
+      "Nom du restaurant": "La Pergola",
+      "Facebook": "https://facebook.com/lapergola.resto",
+      "Instagram": "https://instagram.com/lapergola_dz",
+      "WhatsApp": "+213 7 78 12 34 56",
+      "Telegram": "https://t.me/pergola_dz",
+      "Email": "pergola@gmail.com",
+      "Téléphone": "+213 7 78 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Tacos City",
+      "Facebook": "https://facebook.com/tacoscity.dz",
+      "Instagram": "https://instagram.com/tacoscity_dz",
+      "WhatsApp": "+213 5 57 23 45 67",
+      "Telegram": "https://t.me/tacoscity",
+      "Email": "tacoscity@hotmail.dz",
+      "Téléphone": "+213 5 57 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Gourmet Blida",
+      "Facebook": "https://facebook.com/gourmetblida",
+      "Instagram": "https://instagram.com/gourmet_blida",
+      "WhatsApp": "+213 6 68 34 56 78",
+      "Telegram": "https://t.me/gourmetblida",
+      "Email": "gourmet.blida@yahoo.dz",
+      "Téléphone": "+213 6 68 34 56 78"
+    },
+    {
+      "Nom du restaurant": "L’Olivier",
+      "Facebook": "https://facebook.com/lolivier.resto",
+      "Instagram": "https://instagram.com/lolivier_dz",
+      "WhatsApp": "+213 7 79 45 67 89",
+      "Telegram": "https://t.me/lolivierdz",
+      "Email": "lolivier@gmail.com",
+      "Téléphone": "+213 7 79 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Chez Amine",
+      "Facebook": "https://facebook.com/chezamine.resto",
+      "Instagram": "https://instagram.com/chezamine_dz",
+      "WhatsApp": "+213 5 58 56 78 90",
+      "Telegram": "https://t.me/chezamine",
+      "Email": "amine.resto@live.dz",
+      "Téléphone": "+213 5 58 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Le Palais des Saveurs",
+      "Facebook": "https://facebook.com/palais.saveurs.dz",
+      "Instagram": "https://instagram.com/palais_saveurs",
+      "WhatsApp": "+213 6 69 67 89 01",
+      "Telegram": "https://t.me/palaissaveurs",
+      "Email": "palais.saveurs@gmail.com",
+      "Téléphone": "+213 6 69 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Timgad Food",
+      "Facebook": "https://facebook.com/timgad.food",
+      "Instagram": "https://instagram.com/timgad_food",
+      "WhatsApp": "+213 7 80 78 90 12",
+      "Telegram": "https://t.me/timgadfood",
+      "Email": "timgadfood@yahoo.fr",
+      "Téléphone": "+213 7 80 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Kout",
+      "Facebook": "https://facebook.com/elkout.dz",
+      "Instagram": "https://instagram.com/el_kout_resto",
+      "WhatsApp": "+213 5 59 89 01 23",
+      "Telegram": "https://t.me/elkout",
+      "Email": "elkout@hotmail.com",
+      "Téléphone": "+213 5 59 89 01 23"
+    },
+    {
+      "Nom du restaurant": "La Belle Étoile",
+      "Facebook": "https://facebook.com/labelleetolie.dz",
+      "Instagram": "https://instagram.com/belle_etoile_dz",
+      "WhatsApp": "+213 6 70 90 12 34",
+      "Telegram": "https://t.me/belleetoile",
+      "Email": "belleetoile@outlook.dz",
+      "Téléphone": "+213 6 70 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Snack l’Univers",
+      "Facebook": "https://facebook.com/snacklunivers",
+      "Instagram": "https://instagram.com/snack_lunivers",
+      "WhatsApp": "+213 7 81 01 23 45",
+      "Telegram": "https://t.me/snacklunivers",
+      "Email": "snack.lunivers@gmail.com",
+      "Téléphone": "+213 7 81 01 23 45"
+    },
+    {
+      "Nom du restaurant": "Le Roi du Méchoui",
+      "Facebook": "https://facebook.com/roidumechoui.dz",
+      "Instagram": "https://instagram.com/roi_du_mechoui",
+      "WhatsApp": "+213 5 60 12 34 56",
+      "Telegram": "https://t.me/roidumechoui",
+      "Email": "mechoui.royal@live.fr",
+      "Téléphone": "+213 5 60 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Délices de Constantine",
+      "Facebook": "https://facebook.com/delices.constantine",
+      "Instagram": "https://instagram.com/delices_constantine",
+      "WhatsApp": "+213 6 71 23 45 67",
+      "Telegram": "https://t.me/delicesconstantine",
+      "Email": "delices.constantine@gmail.com",
+      "Téléphone": "+213 6 71 23 45 67"
+    },
+    {
+      "Nom du restaurant": "O’Resto",
+      "Facebook": "https://facebook.com/oresto.dz",
+      "Instagram": "https://instagram.com/o_resto_dz",
+      "WhatsApp": "+213 7 82 34 56 78",
+      "Telegram": "https://t.me/orestodz",
+      "Email": "contact@oresto.dz",
+      "Téléphone": "+213 7 82 34 56 78"
+    },
+    {
+      "Nom du restaurant": "La Terrasse",
+      "Facebook": "https://facebook.com/la.terrasse.dz",
+      "Instagram": "https://instagram.com/la_terrasse_alger",
+      "WhatsApp": "+213 5 61 45 67 89",
+      "Telegram": "https://t.me/laterrasse",
+      "Email": "terrasse@yahoo.dz",
+      "Téléphone": "+213 5 61 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Chez Rabiâa",
+      "Facebook": "https://facebook.com/chezrabiaa",
+      "Instagram": "https://instagram.com/chezrabiaa_dz",
+      "WhatsApp": "+213 6 72 56 78 90",
+      "Telegram": "https://t.me/chezrabiaa",
+      "Email": "rabiaa@hotmail.dz",
+      "Téléphone": "+213 6 72 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Restaurant Annaba Plage",
+      "Facebook": "https://facebook.com/annabaplage.resto",
+      "Instagram": "https://instagram.com/annaba_plage",
+      "WhatsApp": "+213 7 83 67 89 01",
+      "Telegram": "https://t.me/annabaplage",
+      "Email": "annabaplage@gmail.com",
+      "Téléphone": "+213 7 83 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Le Médina",
+      "Facebook": "https://facebook.com/lemedina.resto",
+      "Instagram": "https://instagram.com/lemedina_dz",
+      "WhatsApp": "+213 5 62 78 90 12",
+      "Telegram": "https://t.me/lemedina",
+      "Email": "medina.resto@outlook.dz",
+      "Téléphone": "+213 5 62 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Pizza Roma DZ",
+      "Facebook": "https://facebook.com/pizzaromadz",
+      "Instagram": "https://instagram.com/pizzaroma_dz",
+      "WhatsApp": "+213 6 73 89 01 23",
+      "Telegram": "https://t.me/pizzaromadz",
+      "Email": "pizzaroma@live.fr",
+      "Téléphone": "+213 6 73 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Les Grillades d’Or",
+      "Facebook": "https://facebook.com/grillades.dor",
+      "Instagram": "https://instagram.com/grilladesdor_dz",
+      "WhatsApp": "+213 7 84 90 12 34",
+      "Telegram": "https://t.me/grilladesdor",
+      "Email": "grilladesdor@gmail.com",
+      "Téléphone": "+213 7 84 90 12 34"
+    },
+    {
+      "Nom du restaurant": "El Djazair Food",
+      "Facebook": "https://facebook.com/eldjazair.food",
+      "Instagram": "https://instagram.com/djazair_food",
+      "WhatsApp": "+213 5 63 01 23 45",
+      "Telegram": "https://t.me/djazairfood",
+      "Email": "djazairfood@yahoo.fr",
+      "Téléphone": "+213 5 63 01 23 45"
+    },
+    {
+      "Nom du restaurant": "La Rose des Sables",
+      "Facebook": "https://facebook.com/rose.des.sables.dz",
+      "Instagram": "https://instagram.com/rosedessables_dz",
+      "WhatsApp": "+213 6 74 12 34 56",
+      "Telegram": "https://t.me/rosedessables",
+      "Email": "rosesables@hotmail.dz",
+      "Téléphone": "+213 6 74 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Restaurant Tlemcen City",
+      "Facebook": "https://facebook.com/tlemcen.city.resto",
+      "Instagram": "https://instagram.com/tlemcen_city_resto",
+      "WhatsApp": "+213 7 85 23 45 67",
+      "Telegram": "https://t.me/tlemcenresto",
+      "Email": "tlemcen.resto@gmail.com",
+      "Téléphone": "+213 7 85 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Le Petit Gourmand",
+      "Facebook": "https://facebook.com/petitgourmand.dz",
+      "Instagram": "https://instagram.com/petit_gourmand_dz",
+      "WhatsApp": "+213 5 64 34 56 78",
+      "Telegram": "https://t.me/petitgourmand",
+      "Email": "gourmand.petit@live.dz",
+      "Téléphone": "+213 5 64 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Saveurs d’Antan",
+      "Facebook": "https://facebook.com/saveursdantan.dz",
+      "Instagram": "https://instagram.com/saveurs_dantan",
+      "WhatsApp": "+213 6 75 45 67 89",
+      "Telegram": "https://t.me/saveursdantan",
+      "Email": "dantan.saveurs@outlook.com",
+      "Téléphone": "+213 6 75 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Le Caïd",
+      "Facebook": "https://facebook.com/lecaid.resto",
+      "Instagram": "https://instagram.com/lecaid_dz",
+      "WhatsApp": "+213 7 86 56 78 90",
+      "Telegram": "https://t.me/lecaid",
+      "Email": "caid.resto@gmail.com",
+      "Téléphone": "+213 7 86 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Pizza Napoli DZ",
+      "Facebook": "https://facebook.com/napoli.dz.pizza",
+      "Instagram": "https://instagram.com/napoli_pizza_dz",
+      "WhatsApp": "+213 5 65 67 89 01",
+      "Telegram": "https://t.me/napoliddz",
+      "Email": "napoli@yahoo.dz",
+      "Téléphone": "+213 5 65 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Kheima",
+      "Facebook": "https://facebook.com/elkheima.dz",
+      "Instagram": "https://instagram.com/el_kheima_resto",
+      "WhatsApp": "+213 6 76 78 90 12",
+      "Telegram": "https://t.me/elkheima",
+      "Email": "elkheima@hotmail.com",
+      "Téléphone": "+213 6 76 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Le Jardin d’Eden",
+      "Facebook": "https://facebook.com/jardineden.resto",
+      "Instagram": "https://instagram.com/jardineden_dz",
+      "WhatsApp": "+213 7 87 89 01 23",
+      "Telegram": "https://t.me/jardineden",
+      "Email": "jardineden@gmail.com",
+      "Téléphone": "+213 7 87 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Chawarma Palace",
+      "Facebook": "https://facebook.com/chawarma.palace",
+      "Instagram": "https://instagram.com/chawarma_palace",
+      "WhatsApp": "+213 5 66 90 12 34",
+      "Telegram": "https://t.me/chawarmapalace",
+      "Email": "chawarma@live.fr",
+      "Téléphone": "+213 5 66 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Brik & Co",
+      "Facebook": "https://facebook.com/briketco.dz",
+      "Instagram": "https://instagram.com/briketco_dz",
+      "WhatsApp": "+213 6 77 01 23 45",
+      "Telegram": "https://t.me/briketco",
+      "Email": "brik.co@outlook.dz",
+      "Téléphone": "+213 6 77 01 23 45"
+    },
+    {
+      "Nom du restaurant": "Les Délices du Port",
+      "Facebook": "https://facebook.com/delicesduport",
+      "Instagram": "https://instagram.com/delices_du_port",
+      "WhatsApp": "+213 7 88 12 34 56",
+      "Telegram": "https://t.me/delicesport",
+      "Email": "delicesport@yahoo.fr",
+      "Téléphone": "+213 7 88 12 34 56"
+    },
+    {
+      "Nom du restaurant": "El Mersa Food",
+      "Facebook": "https://facebook.com/elmersa.food",
+      "Instagram": "https://instagram.com/elmersa_food",
+      "WhatsApp": "+213 5 67 23 45 67",
+      "Telegram": "https://t.me/elmersafood",
+      "Email": "mersa.food@gmail.com",
+      "Téléphone": "+213 5 67 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Le Sultan",
+      "Facebook": "https://facebook.com/lesultan.resto",
+      "Instagram": "https://instagram.com/le_sultan_dz",
+      "WhatsApp": "+213 6 78 34 56 78",
+      "Telegram": "https://t.me/lesultandz",
+      "Email": "sultan@hotmail.dz",
+      "Téléphone": "+213 6 78 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Cafétéria Le Mont",
+      "Facebook": "https://facebook.com/cafeterialemont",
+      "Instagram": "https://instagram.com/cafeteria_lemont",
+      "WhatsApp": "+213 7 89 45 67 89",
+      "Telegram": "https://t.me/cafeteriamont",
+      "Email": "cafet.mont@gmail.com",
+      "Téléphone": "+213 7 89 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Bab El Oued Food",
+      "Facebook": "https://facebook.com/babeloued.food",
+      "Instagram": "https://instagram.com/babeloued_food",
+      "WhatsApp": "+213 5 68 56 78 90",
+      "Telegram": "https://t.me/babelouedfood",
+      "Email": "babeloued@live.dz",
+      "Téléphone": "+213 5 68 56 78 90"
+    },
+    {
+      "Nom du restaurant": "L’Authentique",
+      "Facebook": "https://facebook.com/lauthentique.dz",
+      "Instagram": "https://instagram.com/lauthentique_dz",
+      "WhatsApp": "+213 6 79 67 89 01",
+      "Telegram": "https://t.me/lauthentiquedz",
+      "Email": "authentique.resto@yahoo.dz",
+      "Téléphone": "+213 6 79 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Pizzeria Le Four",
+      "Facebook": "https://facebook.com/pizzeria.lefour",
+      "Instagram": "https://instagram.com/pizzeria_lefour",
+      "WhatsApp": "+213 7 90 78 90 12",
+      "Telegram": "https://t.me/lefourpizza",
+      "Email": "lefour.pizza@outlook.com",
+      "Téléphone": "+213 7 90 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Couscous Beni Mered",
+      "Facebook": "https://facebook.com/benimered.couscous",
+      "Instagram": "https://instagram.com/beni_mered_couscous",
+      "WhatsApp": "+213 5 69 89 01 23",
+      "Telegram": "https://t.me/benimered",
+      "Email": "benimered@hotmail.com",
+      "Téléphone": "+213 5 69 89 01 23"
+    },
+    {
+      "Nom du restaurant": "La Marmite d’Oran",
+      "Facebook": "https://facebook.com/marmite.oran",
+      "Instagram": "https://instagram.com/marmite_oranaise",
+      "WhatsApp": "+213 6 80 90 12 34",
+      "Telegram": "https://t.me/marmiteoran",
+      "Email": "marmite.oran@gmail.com",
+      "Téléphone": "+213 6 80 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Fadjr",
+      "Facebook": "https://facebook.com/elfadjr.resto",
+      "Instagram": "https://instagram.com/el_fadjr_dz",
+      "WhatsApp": "+213 7 91 01 23 45",
+      "Telegram": "https://t.me/elfadjr",
+      "Email": "elfadjr@live.fr",
+      "Téléphone": "+213 7 91 01 23 45"
+    },
+    {
+      "Nom du restaurant": "Chez Khaled",
+      "Facebook": "https://facebook.com/chezkhaled.dz",
+      "Instagram": "https://instagram.com/chezkhaled_dz",
+      "WhatsApp": "+213 5 70 12 34 56",
+      "Telegram": "https://t.me/chezkhaled",
+      "Email": "khaled.resto@yahoo.dz",
+      "Téléphone": "+213 5 70 12 34 56"
+    },
+    {
+      "Nom du restaurant": "La Belle Vue",
+      "Facebook": "https://facebook.com/labellevue.resto",
+      "Instagram": "https://instagram.com/belle_vue_dz",
+      "WhatsApp": "+213 6 81 23 45 67",
+      "Telegram": "https://t.me/bellevuedz",
+      "Email": "belle.vue@gmail.com",
+      "Téléphone": "+213 6 81 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Djurdjura Food",
+      "Facebook": "https://facebook.com/djurdjura.food",
+      "Instagram": "https://instagram.com/djurdjura_food",
+      "WhatsApp": "+213 7 92 34 56 78",
+      "Telegram": "https://t.me/djurdjurafood",
+      "Email": "djurdjura@hotmail.dz",
+      "Téléphone": "+213 7 92 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Tajine Magique",
+      "Facebook": "https://facebook.com/tajinemagique",
+      "Instagram": "https://instagram.com/tajine_magique_dz",
+      "WhatsApp": "+213 5 71 45 67 89",
+      "Telegram": "https://t.me/tajinemagique",
+      "Email": "tajine.magique@outlook.dz",
+      "Téléphone": "+213 5 71 45 67 89"
+    },
+    {
+      "Nom du restaurant": "La Grillade de Chlef",
+      "Facebook": "https://facebook.com/grillade.chlef",
+      "Instagram": "https://instagram.com/grillade_chlef",
+      "WhatsApp": "+213 6 82 56 78 90",
+      "Telegram": "https://t.me/grilladechlef",
+      "Email": "grillade.chlef@gmail.com",
+      "Téléphone": "+213 6 82 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Restaurant Timgad City",
+      "Facebook": "https://facebook.com/timgadcity.resto",
+      "Instagram": "https://instagram.com/timgadcity_resto",
+      "WhatsApp": "+213 7 93 67 89 01",
+      "Telegram": "https://t.me/timgadcity",
+      "Email": "timgad.city@live.dz",
+      "Téléphone": "+213 7 93 67 89 01"
+    },
+    {
+      "Nom du restaurant": "L’Assiette du Terroir",
+      "Facebook": "https://facebook.com/assietteduterroir",
+      "Instagram": "https://instagram.com/assiette_du_terroir",
+      "WhatsApp": "+213 5 72 78 90 12",
+      "Telegram": "https://t.me/assietteduterroir",
+      "Email": "assiette.terroir@yahoo.fr",
+      "Téléphone": "+213 5 72 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Pizza Parma DZ",
+      "Facebook": "https://facebook.com/pizzaparmadz",
+      "Instagram": "https://instagram.com/pizza_parma_dz",
+      "WhatsApp": "+213 6 83 89 01 23",
+      "Telegram": "https://t.me/pizzaparma",
+      "Email": "parma.pizza@hotmail.com",
+      "Téléphone": "+213 6 83 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Babor Food",
+      "Facebook": "https://facebook.com/babor.food",
+      "Instagram": "https://instagram.com/babor_food",
+      "WhatsApp": "+213 7 94 90 12 34",
+      "Telegram": "https://t.me/baborfood",
+      "Email": "baborfood@outlook.com",
+      "Téléphone": "+213 7 94 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Kahina",
+      "Facebook": "https://facebook.com/elkahina.resto",
+      "Instagram": "https://instagram.com/elkahina_dz",
+      "WhatsApp": "+213 5 73 01 23 45",
+      "Telegram": "https://t.me/elkahina",
+      "Email": "kahina.resto@gmail.com",
+      "Téléphone": "+213 5 73 01 23 45"
+    },
+    {
+      "Nom du restaurant": "Le Grill du Centre",
+      "Facebook": "https://facebook.com/grill.du.centre",
+      "Instagram": "https://instagram.com/grill_du_centre",
+      "WhatsApp": "+213 6 84 12 34 56",
+      "Telegram": "https://t.me/grillcentre",
+      "Email": "grill.centre@live.dz",
+      "Téléphone": "+213 6 84 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Sidi Bel Abbès Food",
+      "Facebook": "https://facebook.com/sidibelabbes.food",
+      "Instagram": "https://instagram.com/sba_food",
+      "WhatsApp": "+213 7 95 23 45 67",
+      "Telegram": "https://t.me/sbafood",
+      "Email": "sba.food@yahoo.dz",
+      "Téléphone": "+213 7 95 23 45 67"
+    },
+    {
+      "Nom du restaurant": "La Taverna DZ",
+      "Facebook": "https://facebook.com/tavernadz.resto",
+      "Instagram": "https://instagram.com/taverna_dz",
+      "WhatsApp": "+213 5 74 34 56 78",
+      "Telegram": "https://t.me/tavernadz",
+      "Email": "taverna@hotmail.com",
+      "Téléphone": "+213 5 74 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Couscous Délice",
+      "Facebook": "https://facebook.com/couscousdelice.dz",
+      "Instagram": "https://instagram.com/couscous_delice",
+      "WhatsApp": "+213 6 85 45 67 89",
+      "Telegram": "https://t.me/couscousdelice",
+      "Email": "couscous.delice@gmail.com",
+      "Téléphone": "+213 6 85 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Djemila",
+      "Facebook": "https://facebook.com/eldjemila.resto",
+      "Instagram": "https://instagram.com/el_djemila_dz",
+      "WhatsApp": "+213 7 96 56 78 90",
+      "Telegram": "https://t.me/eldjemila",
+      "Email": "djemila@outlook.dz",
+      "Téléphone": "+213 7 96 56 78 90"
+    },
+    {
+      "Nom du restaurant": "L’Escale Gourmande",
+      "Facebook": "https://facebook.com/escale.gourmande.dz",
+      "Instagram": "https://instagram.com/escale_gourmande",
+      "WhatsApp": "+213 5 75 67 89 01",
+      "Telegram": "https://t.me/escalegourmande",
+      "Email": "escale.gourmande@live.fr",
+      "Téléphone": "+213 5 75 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Pizza Darna",
+      "Facebook": "https://facebook.com/pizzadarna.dz",
+      "Instagram": "https://instagram.com/pizza_darna",
+      "WhatsApp": "+213 6 86 78 90 12",
+      "Telegram": "https://t.me/pizzadarna",
+      "Email": "darna.pizza@yahoo.fr",
+      "Téléphone": "+213 6 86 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Le Timgad Grill",
+      "Facebook": "https://facebook.com/timgadgrill",
+      "Instagram": "https://instagram.com/timgad_grill",
+      "WhatsApp": "+213 7 97 89 01 23",
+      "Telegram": "https://t.me/timgadgrill",
+      "Email": "timgadgrill@gmail.com",
+      "Téléphone": "+213 7 97 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Alimentation Générale Saveurs",
+      "Facebook": "https://facebook.com/alimentation.saveurs",
+      "Instagram": "https://instagram.com/alim_saveurs",
+      "WhatsApp": "+213 5 76 90 12 34",
+      "Telegram": "https://t.me/alimsaveurs",
+      "Email": "alim.saveurs@hotmail.dz",
+      "Téléphone": "+213 5 76 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Restaurant Le Récif",
+      "Facebook": "https://facebook.com/recif.resto",
+      "Instagram": "https://instagram.com/recif_dz",
+      "WhatsApp": "+213 6 87 01 23 45",
+      "Telegram": "https://t.me/recifdz",
+      "Email": "recif.resto@outlook.com",
+      "Téléphone": "+213 6 87 01 23 45"
+    },
+    {
+      "Nom du restaurant": "Bladi Food",
+      "Facebook": "https://facebook.com/bladi.food.dz",
+      "Instagram": "https://instagram.com/bladi_food",
+      "WhatsApp": "+213 7 98 12 34 56",
+      "Telegram": "https://t.me/bladifood",
+      "Email": "bladi.food@live.dz",
+      "Téléphone": "+213 7 98 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Les Olivers de Kabylie",
+      "Facebook": "https://facebook.com/oliviers.kabylie",
+      "Instagram": "https://instagram.com/oliviers_kabylie",
+      "WhatsApp": "+213 5 77 23 45 67",
+      "Telegram": "https://t.me/olivierskabylie",
+      "Email": "oliviers.kabylie@gmail.com",
+      "Téléphone": "+213 5 77 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Pizza Djurdjura",
+      "Facebook": "https://facebook.com/pizzadjurdjura",
+      "Instagram": "https://instagram.com/pizza_djurdjura",
+      "WhatsApp": "+213 6 88 34 56 78",
+      "Telegram": "https://t.me/pizzadjurdjura",
+      "Email": "djurdjura.pizza@yahoo.dz",
+      "Téléphone": "+213 6 88 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Moudjahid",
+      "Facebook": "https://facebook.com/elmoudjahid.resto",
+      "Instagram": "https://instagram.com/el_moudjahid_dz",
+      "WhatsApp": "+213 7 99 45 67 89",
+      "Telegram": "https://t.me/elmoudjahid",
+      "Email": "moudjahid@hotmail.com",
+      "Téléphone": "+213 7 99 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Les Saveurs d’Alger",
+      "Facebook": "https://facebook.com/saveurs.dalger",
+      "Instagram": "https://instagram.com/saveurs_alger",
+      "WhatsApp": "+213 5 78 56 78 90",
+      "Telegram": "https://t.me/saveursalger",
+      "Email": "saveurs.alger@outlook.dz",
+      "Téléphone": "+213 5 78 56 78 90"
+    },
+    {
+      "Nom du restaurant": "Le Timgad Snack",
+      "Facebook": "https://facebook.com/timgadsnack",
+      "Instagram": "https://instagram.com/timgad_snack",
+      "WhatsApp": "+213 6 89 67 89 01",
+      "Telegram": "https://t.me/timgadsnack",
+      "Email": "timgad.snack@live.fr",
+      "Téléphone": "+213 6 89 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Couscous El Djazaïr",
+      "Facebook": "https://facebook.com/couscouseldjazair",
+      "Instagram": "https://instagram.com/couscous_djazair",
+      "WhatsApp": "+213 7 70 78 90 12",
+      "Telegram": "https://t.me/couscousdjazair",
+      "Email": "couscous.djazair@gmail.com",
+      "Téléphone": "+213 7 70 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Restaurant le 5 Juillet",
+      "Facebook": "https://facebook.com/5juillet.resto",
+      "Instagram": "https://instagram.com/5juillet_resto",
+      "WhatsApp": "+213 5 79 89 01 23",
+      "Telegram": "https://t.me/5juillet",
+      "Email": "5juillet@yahoo.com",
+      "Téléphone": "+213 5 79 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Grillade du Port d’Alger",
+      "Facebook": "https://facebook.com/grillade.port.alger",
+      "Instagram": "https://instagram.com/grillade_port_alger",
+      "WhatsApp": "+213 6 90 90 12 34",
+      "Telegram": "https://t.me/grilladeport",
+      "Email": "port.alger@hotmail.dz",
+      "Téléphone": "+213 6 90 90 12 34"
+    },
+    {
+      "Nom du restaurant": "Restaurant Les Arcades",
+      "Facebook": "https://facebook.com/arcades.resto",
+      "Instagram": "https://instagram.com/arcades_dz",
+      "WhatsApp": "+213 7 71 01 23 45",
+      "Telegram": "https://t.me/arcadesdz",
+      "Email": "arcades@gmail.com",
+      "Téléphone": "+213 7 71 01 23 45"
+    },
+    {
+      "Nom du restaurant": "La Coupole",
+      "Facebook": "https://facebook.com/lacoupole.resto",
+      "Instagram": "https://instagram.com/lacoupole_dz",
+      "WhatsApp": "+213 5 80 12 34 56",
+      "Telegram": "https://t.me/lacoupoledz",
+      "Email": "coupole@outlook.dz",
+      "Téléphone": "+213 5 80 12 34 56"
+    },
+    {
+      "Nom du restaurant": "Pizza Mira",
+      "Facebook": "https://facebook.com/pizzamira.dz",
+      "Instagram": "https://instagram.com/pizza_mira_dz",
+      "WhatsApp": "+213 6 91 23 45 67",
+      "Telegram": "https://t.me/pizzamira",
+      "Email": "mira.pizza@live.fr",
+      "Téléphone": "+213 6 91 23 45 67"
+    },
+    {
+      "Nom du restaurant": "Le Riad El Djazair",
+      "Facebook": "https://facebook.com/riad.djazair.resto",
+      "Instagram": "https://instagram.com/riad_djazair",
+      "WhatsApp": "+213 7 72 34 56 78",
+      "Telegram": "https://t.me/riaddjazair",
+      "Email": "riad.djazair@yahoo.dz",
+      "Téléphone": "+213 7 72 34 56 78"
+    },
+    {
+      "Nom du restaurant": "Couscous Bouzid",
+      "Facebook": "https://facebook.com/couscous.bouzid",
+      "Instagram": "https://instagram.com/couscous_bouzid",
+      "WhatsApp": "+213 5 81 45 67 89",
+      "Telegram": "https://t.me/couscousbouzid",
+      "Email": "bouzid.couscous@gmail.com",
+      "Téléphone": "+213 5 81 45 67 89"
+    },
+    {
+      "Nom du restaurant": "Restaurant El Hamma",
+      "Facebook": "https://facebook.com/elhamma.resto",
+      "Instagram": "https://instagram.com/elhamma_dz",
+      "WhatsApp": "+213 6 92 56 78 90",
+      "Telegram": "https://t.me/elhammadz",
+      "Email": "hamma.resto@hotmail.com",
+      "Téléphone": "+213 6 92 56 78 90"
+    },
+    {
+      "Nom du restaurant": "La Piazza",
+      "Facebook": "https://facebook.com/lapiazza.alger",
+      "Instagram": "https://instagram.com/la_piazza_dz",
+      "WhatsApp": "+213 7 73 67 89 01",
+      "Telegram": "https://t.me/lapiazzadz",
+      "Email": "piazza@outlook.com",
+      "Téléphone": "+213 7 73 67 89 01"
+    },
+    {
+      "Nom du restaurant": "Délices du Casbah",
+      "Facebook": "https://facebook.com/delices.casbah",
+      "Instagram": "https://instagram.com/delices_casbah",
+      "WhatsApp": "+213 5 82 78 90 12",
+      "Telegram": "https://t.me/delicescasbah",
+      "Email": "casbah.delices@live.dz",
+      "Téléphone": "+213 5 82 78 90 12"
+    },
+    {
+      "Nom du restaurant": "Le Régal Kabyle",
+      "Facebook": "https://facebook.com/regal.kabyle",
+      "Instagram": "https://instagram.com/regal_kabyle_dz",
+      "WhatsApp": "+213 6 93 89 01 23",
+      "Telegram": "https://t.me/regalkabyle",
+      "Email": "regal.kabyle@gmail.com",
+      "Téléphone": "+213 6 93 89 01 23"
+    },
+    {
+      "Nom du restaurant": "Restaurant Sidi M’Cid",
+      "Facebook": "https://facebook.com/sidimcid.resto",
+      "Instagram": "https://instagram.com/sidi_mcid_constantine",
+      "WhatsApp": "+213 7 74 90 12 34",
+      "Telegram": "https://t.me/sidimcid",
+      "Email": "sidimcid@yahoo.fr",
+      "Téléphone": "+213 7 74 90 12 34"
+    },
+    {
+      "Nom du restaurant": "La Perle du Djurdjura",
+      "Facebook": "https://facebook.com/perle.djurdjura.resto",
+      "Instagram": "https://instagram.com/perle_djurdjura",
+      "WhatsApp": "+213 5 83 01 23 45",
+      "Telegram": "https://t.me/perledjurdjura",
+      "Email": "perle.djurdjura@outlook.com",
+      "Téléphone": "+213 5 83 01 23 45"
+    }
+  ],
+  "companies": [
+    {
+      "Nom de l'entreprise": "SOTRAGAL",
+      "Facebook": "https://facebook.com/sotragal.dz",
+      "Instagram": "https://instagram.com/sotragal_dz",
+      "WhatsApp": "+213 6 50 12 34 56",
+      "Telegram": "https://t.me/sotragal",
+      "Email": "contact@sotragal.dz",
+      "Téléphone": "+213 6 50 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "SARL El Wifak",
+      "Facebook": "https://facebook.com/elwifak.industries",
+      "Instagram": "https://instagram.com/elwifak_dz",
+      "WhatsApp": "+213 7 61 23 45 67",
+      "Telegram": "https://t.me/elwifak",
+      "Email": "elwifak@yahoo.dz",
+      "Téléphone": "+213 7 61 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "SONARIC",
+      "Facebook": "https://facebook.com/sonaric.dz",
+      "Instagram": "https://instagram.com/sonaric_officiel",
+      "WhatsApp": "+213 5 72 34 56 78",
+      "Telegram": "https://t.me/sonaric",
+      "Email": "info@sonaric.dz",
+      "Téléphone": "+213 5 72 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Groupe Hasnaoui",
+      "Facebook": "https://facebook.com/groupe.hasnaoui",
+      "Instagram": "https://instagram.com/groupe_hasnaoui",
+      "WhatsApp": "+213 6 83 45 67 89",
+      "Telegram": "https://t.me/hasnaoui",
+      "Email": "hasnaoui@industrie.dz",
+      "Téléphone": "+213 6 83 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Manufacture Algérienne",
+      "Facebook": "https://facebook.com/manuf.alg.dz",
+      "Instagram": "https://instagram.com/manuf_alg",
+      "WhatsApp": "+213 7 94 56 78 90",
+      "Telegram": "https://t.me/manufalg",
+      "Email": "manuf.alg@gmail.com",
+      "Téléphone": "+213 7 94 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "SARL Amimer",
+      "Facebook": "https://facebook.com/amimer.industrie",
+      "Instagram": "https://instagram.com/amimer_dz",
+      "WhatsApp": "+213 5 50 67 89 01",
+      "Telegram": "https://t.me/amimer",
+      "Email": "amimer@hotmail.com",
+      "Téléphone": "+213 5 50 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "SIM (Ste Indust Metaux)",
+      "Facebook": "https://facebook.com/sim.industries",
+      "Instagram": "https://instagram.com/sim_metaux",
+      "WhatsApp": "+213 6 61 78 90 12",
+      "Telegram": "https://t.me/simdz",
+      "Email": "sim.metaux@yahoo.dz",
+      "Téléphone": "+213 6 61 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "ENIEM",
+      "Facebook": "https://facebook.com/eniem.dz",
+      "Instagram": "https://instagram.com/eniem_officiel",
+      "WhatsApp": "+213 7 72 89 01 23",
+      "Telegram": "https://t.me/eniem",
+      "Email": "eniem@live.dz",
+      "Téléphone": "+213 7 72 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Plastique El Djazair",
+      "Facebook": "https://facebook.com/plastique.djazair",
+      "Instagram": "https://instagram.com/plastique_dz",
+      "WhatsApp": "+213 5 51 90 12 34",
+      "Telegram": "https://t.me/plastiquedz",
+      "Email": "plastique@outlook.dz",
+      "Téléphone": "+213 5 51 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Industrie Papier Algérie",
+      "Facebook": "https://facebook.com/papier.alg",
+      "Instagram": "https://instagram.com/papier_algerie",
+      "WhatsApp": "+213 6 62 01 23 45",
+      "Telegram": "https://t.me/papieralg",
+      "Email": "papier.alg@hotmail.dz",
+      "Téléphone": "+213 6 62 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "SARL Benseba",
+      "Facebook": "https://facebook.com/benseba.industries",
+      "Instagram": "https://instagram.com/benseba_dz",
+      "WhatsApp": "+213 7 73 12 34 56",
+      "Telegram": "https://t.me/benseba",
+      "Email": "benseba@yahoo.fr",
+      "Téléphone": "+213 7 73 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "Acier Américain DZ",
+      "Facebook": "https://facebook.com/acieramericain.dz",
+      "Instagram": "https://instagram.com/acier_americain",
+      "WhatsApp": "+213 5 52 23 45 67",
+      "Telegram": "https://t.me/acieramericain",
+      "Email": "acier.americain@gmail.com",
+      "Téléphone": "+213 5 52 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "Toufoula Plast",
+      "Facebook": "https://facebook.com/toufoula.plast",
+      "Instagram": "https://instagram.com/toufoula_dz",
+      "WhatsApp": "+213 6 63 34 56 78",
+      "Telegram": "https://t.me/toufoula",
+      "Email": "toufoula@live.fr",
+      "Téléphone": "+213 6 63 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "SARL El Adjimi",
+      "Facebook": "https://facebook.com/eladjimi.industrie",
+      "Instagram": "https://instagram.com/eladjimi_dz",
+      "WhatsApp": "+213 7 74 45 67 89",
+      "Telegram": "https://t.me/eladjimi",
+      "Email": "adjimi@hotmail.com",
+      "Téléphone": "+213 7 74 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Cosider",
+      "Facebook": "https://facebook.com/cosider.dz",
+      "Instagram": "https://instagram.com/cosider_officiel",
+      "WhatsApp": "+213 5 53 56 78 90",
+      "Telegram": "https://t.me/cosider",
+      "Email": "cosider@outlook.dz",
+      "Téléphone": "+213 5 53 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Engen Algérie",
+      "Facebook": "https://facebook.com/engen.algerie",
+      "Instagram": "https://instagram.com/engen_dz",
+      "WhatsApp": "+213 6 64 67 89 01",
+      "Telegram": "https://t.me/engenalgerie",
+      "Email": "engen@yahoo.dz",
+      "Téléphone": "+213 6 64 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "ETRHB",
+      "Facebook": "https://facebook.com/etrhb.dz",
+      "Instagram": "https://instagram.com/etrhb_dz",
+      "WhatsApp": "+213 7 75 78 90 12",
+      "Telegram": "https://t.me/etrhb",
+      "Email": "etrhb@gmail.com",
+      "Téléphone": "+213 7 75 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Batimetal",
+      "Facebook": "https://facebook.com/batimetal.dz",
+      "Instagram": "https://instagram.com/batimetal_officiel",
+      "WhatsApp": "+213 5 54 89 01 23",
+      "Telegram": "https://t.me/batimetal",
+      "Email": "batimetal@live.dz",
+      "Téléphone": "+213 5 54 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Algérie Pétrochimie",
+      "Facebook": "https://facebook.com/algeriepetro",
+      "Instagram": "https://instagram.com/petrochimie_dz",
+      "WhatsApp": "+213 6 65 90 12 34",
+      "Telegram": "https://t.me/algeriepetro",
+      "Email": "petro@hotmail.com",
+      "Téléphone": "+213 6 65 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Wood Industry DZ",
+      "Facebook": "https://facebook.com/woodindustrydz",
+      "Instagram": "https://instagram.com/wood_dz",
+      "WhatsApp": "+213 7 76 01 23 45",
+      "Telegram": "https://t.me/woodindustry",
+      "Email": "wood.dz@outlook.dz",
+      "Téléphone": "+213 7 76 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "SARL Metidji",
+      "Facebook": "https://facebook.com/metidji.industrie",
+      "Instagram": "https://instagram.com/metidji_dz",
+      "WhatsApp": "+213 5 55 12 34 56",
+      "Telegram": "https://t.me/metidji",
+      "Email": "metidji@yahoo.fr",
+      "Téléphone": "+213 5 55 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "AGROMED",
+      "Facebook": "https://facebook.com/agromed.dz",
+      "Instagram": "https://instagram.com/agromed_algerie",
+      "WhatsApp": "+213 6 66 23 45 67",
+      "Telegram": "https://t.me/agromed",
+      "Email": "agromed@gmail.com",
+      "Téléphone": "+213 6 66 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "SNAX",
+      "Facebook": "https://facebook.com/snax.dz",
+      "Instagram": "https://instagram.com/snax_algerie",
+      "WhatsApp": "+213 7 77 34 56 78",
+      "Telegram": "https://t.me/snaxdz",
+      "Email": "snax@live.fr",
+      "Téléphone": "+213 7 77 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Complexe Sider",
+      "Facebook": "https://facebook.com/complexe.sider",
+      "Instagram": "https://instagram.com/sider_dz",
+      "WhatsApp": "+213 5 56 45 67 89",
+      "Telegram": "https://t.me/complexesider",
+      "Email": "sider@hotmail.dz",
+      "Téléphone": "+213 5 56 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Coloma",
+      "Facebook": "https://facebook.com/coloma.dz",
+      "Instagram": "https://instagram.com/coloma_officiel",
+      "WhatsApp": "+213 6 67 56 78 90",
+      "Telegram": "https://t.me/colomadz",
+      "Email": "coloma@yahoo.dz",
+      "Téléphone": "+213 6 67 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "SARL Atoui",
+      "Facebook": "https://facebook.com/atoui.industries",
+      "Instagram": "https://instagram.com/atoui_dz",
+      "WhatsApp": "+213 7 78 67 89 01",
+      "Telegram": "https://t.me/atoui",
+      "Email": "atoui@outlook.com",
+      "Téléphone": "+213 7 78 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "Textile El Wafa",
+      "Facebook": "https://facebook.com/textile.elwafa",
+      "Instagram": "https://instagram.com/textile_elwafa",
+      "WhatsApp": "+213 5 57 78 90 12",
+      "Telegram": "https://t.me/elwafatex",
+      "Email": "elwafa.textile@gmail.com",
+      "Téléphone": "+213 5 57 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Fondal",
+      "Facebook": "https://facebook.com/fondal.dz",
+      "Instagram": "https://instagram.com/fondal_dz",
+      "WhatsApp": "+213 6 68 89 01 23",
+      "Telegram": "https://t.me/fondaldz",
+      "Email": "fondal@live.dz",
+      "Téléphone": "+213 6 68 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Orascom Construction DZ",
+      "Facebook": "https://facebook.com/orascom.dz",
+      "Instagram": "https://instagram.com/orascom_dz",
+      "WhatsApp": "+213 7 79 90 12 34",
+      "Telegram": "https://t.me/orascomdz",
+      "Email": "orascom@hotmail.com",
+      "Téléphone": "+213 7 79 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Alkama",
+      "Facebook": "https://facebook.com/alkama.industrie",
+      "Instagram": "https://instagram.com/alkama_dz",
+      "WhatsApp": "+213 5 58 01 23 45",
+      "Telegram": "https://t.me/alkamadz",
+      "Email": "alkama@yahoo.fr",
+      "Téléphone": "+213 5 58 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "Afric Plast",
+      "Facebook": "https://facebook.com/africplast.dz",
+      "Instagram": "https://instagram.com/africplast_dz",
+      "WhatsApp": "+213 6 69 12 34 56",
+      "Telegram": "https://t.me/africplast",
+      "Email": "africplast@outlook.dz",
+      "Téléphone": "+213 6 69 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "SARL Tahanout",
+      "Facebook": "https://facebook.com/tahanout.industries",
+      "Instagram": "https://instagram.com/tahanout_dz",
+      "WhatsApp": "+213 7 80 23 45 67",
+      "Telegram": "https://t.me/tahanout",
+      "Email": "tahanout@gmail.com",
+      "Téléphone": "+213 7 80 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "EMAC",
+      "Facebook": "https://facebook.com/emac.dz",
+      "Instagram": "https://instagram.com/emac_dz",
+      "WhatsApp": "+213 5 59 34 56 78",
+      "Telegram": "https://t.me/emacdz",
+      "Email": "emac@live.fr",
+      "Téléphone": "+213 5 59 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Cosider Canalisations",
+      "Facebook": "https://facebook.com/cosider.canalisations",
+      "Instagram": "https://instagram.com/cosider_can",
+      "WhatsApp": "+213 6 70 45 67 89",
+      "Telegram": "https://t.me/cosidercanal",
+      "Email": "canalisation@yahoo.dz",
+      "Téléphone": "+213 6 70 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "SETIF Plast",
+      "Facebook": "https://facebook.com/setifplast.dz",
+      "Instagram": "https://instagram.com/setif_plast",
+      "WhatsApp": "+213 7 81 56 78 90",
+      "Telegram": "https://t.me/setifplast",
+      "Email": "setif.plast@hotmail.com",
+      "Téléphone": "+213 7 81 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Moulin d’Oran",
+      "Facebook": "https://facebook.com/moulin.oran.dz",
+      "Instagram": "https://instagram.com/moulin_oran",
+      "WhatsApp": "+213 5 60 67 89 01",
+      "Telegram": "https://t.me/moulinoran",
+      "Email": "moulin.oran@outlook.com",
+      "Téléphone": "+213 5 60 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "Société Céramique Algérie",
+      "Facebook": "https://facebook.com/ceramique.algerie",
+      "Instagram": "https://instagram.com/ceramique_dz",
+      "WhatsApp": "+213 6 71 78 90 12",
+      "Telegram": "https://t.me/ceramiquealgerie",
+      "Email": "ceramique@live.dz",
+      "Téléphone": "+213 6 71 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Azzouzi",
+      "Facebook": "https://facebook.com/azzouzi.industrie",
+      "Instagram": "https://instagram.com/azzouzi_dz",
+      "WhatsApp": "+213 7 82 89 01 23",
+      "Telegram": "https://t.me/azzouzidz",
+      "Email": "azzouzi@yahoo.fr",
+      "Téléphone": "+213 7 82 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Algérie Ciment",
+      "Facebook": "https://facebook.com/algerie.ciment",
+      "Instagram": "https://instagram.com/ciment_algerie",
+      "WhatsApp": "+213 5 61 90 12 34",
+      "Telegram": "https://t.me/algerieciment",
+      "Email": "ciment.dz@gmail.com",
+      "Téléphone": "+213 5 61 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "SARL Ferrovial",
+      "Facebook": "https://facebook.com/ferrovial.dz",
+      "Instagram": "https://instagram.com/ferrovial_dz",
+      "WhatsApp": "+213 6 72 01 23 45",
+      "Telegram": "https://t.me/ferrovial",
+      "Email": "ferrovial@hotmail.com",
+      "Téléphone": "+213 6 72 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "Tubes Algérie",
+      "Facebook": "https://facebook.com/tubesalgerie.dz",
+      "Instagram": "https://instagram.com/tubes_algerie",
+      "WhatsApp": "+213 7 83 12 34 56",
+      "Telegram": "https://t.me/tubesalgerie",
+      "Email": "tubes@outlook.dz",
+      "Téléphone": "+213 7 83 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "GCB",
+      "Facebook": "https://facebook.com/gcb.dz",
+      "Instagram": "https://instagram.com/gcb_dz",
+      "WhatsApp": "+213 5 62 23 45 67",
+      "Telegram": "https://t.me/gcbdz",
+      "Email": "gcb@live.fr",
+      "Téléphone": "+213 5 62 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "Sarl El Bina",
+      "Facebook": "https://facebook.com/elbina.industrie",
+      "Instagram": "https://instagram.com/elbina_dz",
+      "WhatsApp": "+213 6 73 34 56 78",
+      "Telegram": "https://t.me/elbina",
+      "Email": "elbina@yahoo.dz",
+      "Téléphone": "+213 6 73 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "ISER",
+      "Facebook": "https://facebook.com/iser.dz",
+      "Instagram": "https://instagram.com/iser_algerie",
+      "WhatsApp": "+213 7 84 45 67 89",
+      "Telegram": "https://t.me/iseralgerie",
+      "Email": "iser@hotmail.com",
+      "Téléphone": "+213 7 84 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Spa Hydra",
+      "Facebook": "https://facebook.com/spahydra.dz",
+      "Instagram": "https://instagram.com/spa_hydra_dz",
+      "WhatsApp": "+213 5 63 56 78 90",
+      "Telegram": "https://t.me/spahydra",
+      "Email": "hydra.spa@gmail.com",
+      "Téléphone": "+213 5 63 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "PEB Algérie",
+      "Facebook": "https://facebook.com/pebalgerie",
+      "Instagram": "https://instagram.com/peb_dz",
+      "WhatsApp": "+213 6 74 67 89 01",
+      "Telegram": "https://t.me/pebalgerie",
+      "Email": "peb@outlook.dz",
+      "Téléphone": "+213 6 74 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "SARL General Emballage",
+      "Facebook": "https://facebook.com/generalemballage.dz",
+      "Instagram": "https://instagram.com/general_emballage",
+      "WhatsApp": "+213 7 85 78 90 12",
+      "Telegram": "https://t.me/generalemballage",
+      "Email": "emballage@live.dz",
+      "Téléphone": "+213 7 85 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Moulins de la Soummam",
+      "Facebook": "https://facebook.com/moulins.soummam",
+      "Instagram": "https://instagram.com/moulins_soummam",
+      "WhatsApp": "+213 5 64 89 01 23",
+      "Telegram": "https://t.me/moulinssoummam",
+      "Email": "soummam.moulin@yahoo.fr",
+      "Téléphone": "+213 5 64 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "ABC Peinture",
+      "Facebook": "https://facebook.com/abc.peinture.dz",
+      "Instagram": "https://instagram.com/abc_peinture",
+      "WhatsApp": "+213 6 75 90 12 34",
+      "Telegram": "https://t.me/abcpeinture",
+      "Email": "abc.peinture@hotmail.com",
+      "Téléphone": "+213 6 75 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Sider El Hadjar",
+      "Facebook": "https://facebook.com/sider.elhadjar",
+      "Instagram": "https://instagram.com/sider_hadjar",
+      "WhatsApp": "+213 7 86 01 23 45",
+      "Telegram": "https://t.me/siderhadjar",
+      "Email": "hadjar.sider@outlook.dz",
+      "Téléphone": "+213 7 86 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "MAG (Mécanique Aviation)",
+      "Facebook": "https://facebook.com/mag.aviation.dz",
+      "Instagram": "https://instagram.com/mag_aviation",
+      "WhatsApp": "+213 5 65 12 34 56",
+      "Telegram": "https://t.me/magaviation",
+      "Email": "mag@live.dz",
+      "Téléphone": "+213 5 65 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Afak",
+      "Facebook": "https://facebook.com/afak.industries",
+      "Instagram": "https://instagram.com/afak_dz",
+      "WhatsApp": "+213 6 76 23 45 67",
+      "Telegram": "https://t.me/afakdz",
+      "Email": "afak@yahoo.dz",
+      "Téléphone": "+213 6 76 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "B.A.T",
+      "Facebook": "https://facebook.com/bat.industrie.dz",
+      "Instagram": "https://instagram.com/bat_dz",
+      "WhatsApp": "+213 7 87 34 56 78",
+      "Telegram": "https://t.me/batdz",
+      "Email": "bat.industrie@gmail.com",
+      "Téléphone": "+213 7 87 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Rouiba Bouteilles",
+      "Facebook": "https://facebook.com/rouiba.bouteilles",
+      "Instagram": "https://instagram.com/rouiba_bouteilles",
+      "WhatsApp": "+213 5 66 45 67 89",
+      "Telegram": "https://t.me/rouibabouteilles",
+      "Email": "rouiba.b@hotmail.com",
+      "Téléphone": "+213 5 66 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Sematec",
+      "Facebook": "https://facebook.com/sematec.dz",
+      "Instagram": "https://instagram.com/sematec_dz",
+      "WhatsApp": "+213 6 77 56 78 90",
+      "Telegram": "https://t.me/sematecdz",
+      "Email": "sematec@outlook.dz",
+      "Téléphone": "+213 6 77 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Groupe SM",
+      "Facebook": "https://facebook.com/groupe.sm.dz",
+      "Instagram": "https://instagram.com/groupe_sm_dz",
+      "WhatsApp": "+213 7 88 67 89 01",
+      "Telegram": "https://t.me/groupesm",
+      "Email": "groupe.sm@live.fr",
+      "Téléphone": "+213 7 88 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "Sarl NCA",
+      "Facebook": "https://facebook.com/nca.dz",
+      "Instagram": "https://instagram.com/nca_dz",
+      "WhatsApp": "+213 5 67 78 90 12",
+      "Telegram": "https://t.me/ncadz",
+      "Email": "nca@yahoo.fr",
+      "Téléphone": "+213 5 67 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Algérie Joints",
+      "Facebook": "https://facebook.com/algerie.joints",
+      "Instagram": "https://instagram.com/joints_dz",
+      "WhatsApp": "+213 6 78 89 01 23",
+      "Telegram": "https://t.me/algeriejoints",
+      "Email": "joints@hotmail.com",
+      "Téléphone": "+213 6 78 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Sarl El Moustakbel",
+      "Facebook": "https://facebook.com/elmoustakbel.industrie",
+      "Instagram": "https://instagram.com/elmoustakbel_dz",
+      "WhatsApp": "+213 7 89 90 12 34",
+      "Telegram": "https://t.me/elmoustakbel",
+      "Email": "moustakbel@outlook.dz",
+      "Téléphone": "+213 7 89 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "SNC Lavalin DZ",
+      "Facebook": "https://facebook.com/snclavalin.dz",
+      "Instagram": "https://instagram.com/snclavalin_dz",
+      "WhatsApp": "+213 5 68 01 23 45",
+      "Telegram": "https://t.me/snclavalindz",
+      "Email": "snc@live.dz",
+      "Téléphone": "+213 5 68 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "Boucherie Industrielle DZ",
+      "Facebook": "https://facebook.com/boucherie.industrielle",
+      "Instagram": "https://instagram.com/boucherie_ind_dz",
+      "WhatsApp": "+213 6 79 12 34 56",
+      "Telegram": "https://t.me/boucherieind",
+      "Email": "boucherie.ind@gmail.com",
+      "Téléphone": "+213 6 79 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Khaznadar",
+      "Facebook": "https://facebook.com/khaznadar.industries",
+      "Instagram": "https://instagram.com/khaznadar_dz",
+      "WhatsApp": "+213 7 90 23 45 67",
+      "Telegram": "https://t.me/khaznadar",
+      "Email": "khaznadar@yahoo.dz",
+      "Téléphone": "+213 7 90 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "Spa Altro",
+      "Facebook": "https://facebook.com/spa.altro.dz",
+      "Instagram": "https://instagram.com/spa_altro",
+      "WhatsApp": "+213 5 69 34 56 78",
+      "Telegram": "https://t.me/spaaltro",
+      "Email": "altro@hotmail.com",
+      "Téléphone": "+213 5 69 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Batiprod",
+      "Facebook": "https://facebook.com/batiprod.dz",
+      "Instagram": "https://instagram.com/batiprod_dz",
+      "WhatsApp": "+213 6 80 45 67 89",
+      "Telegram": "https://t.me/batiprod",
+      "Email": "batiprod@outlook.dz",
+      "Téléphone": "+213 6 80 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Industrie du Bois d’Oran",
+      "Facebook": "https://facebook.com/bois.oran.industrie",
+      "Instagram": "https://instagram.com/bois_oran",
+      "WhatsApp": "+213 7 91 56 78 90",
+      "Telegram": "https://t.me/boisoran",
+      "Email": "bois.oran@live.fr",
+      "Téléphone": "+213 7 91 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Sarl El Mizane",
+      "Facebook": "https://facebook.com/elmizane.industrie",
+      "Instagram": "https://instagram.com/elmizane_dz",
+      "WhatsApp": "+213 5 70 67 89 01",
+      "Telegram": "https://t.me/elmizane",
+      "Email": "mizane@yahoo.fr",
+      "Téléphone": "+213 5 70 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "SKB",
+      "Facebook": "https://facebook.com/skb.dz",
+      "Instagram": "https://instagram.com/skb_officiel",
+      "WhatsApp": "+213 6 81 78 90 12",
+      "Telegram": "https://t.me/skbofficiel",
+      "Email": "skb@hotmail.com",
+      "Téléphone": "+213 6 81 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Boudissa",
+      "Facebook": "https://facebook.com/boudissa.industries",
+      "Instagram": "https://instagram.com/boudissa_dz",
+      "WhatsApp": "+213 7 92 89 01 23",
+      "Telegram": "https://t.me/boudissa",
+      "Email": "boudissa@outlook.dz",
+      "Téléphone": "+213 7 92 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Sarl El Kheir",
+      "Facebook": "https://facebook.com/elkheir.industrie",
+      "Instagram": "https://instagram.com/elkheir_dz",
+      "WhatsApp": "+213 5 71 90 12 34",
+      "Telegram": "https://t.me/elkheir",
+      "Email": "elkheir@live.dz",
+      "Téléphone": "+213 5 71 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Gueddouda",
+      "Facebook": "https://facebook.com/gueddouda.dz",
+      "Instagram": "https://instagram.com/gueddouda_dz",
+      "WhatsApp": "+213 6 82 01 23 45",
+      "Telegram": "https://t.me/gueddouda",
+      "Email": "gueddouda@yahoo.dz",
+      "Téléphone": "+213 6 82 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "Algérie Asphalte",
+      "Facebook": "https://facebook.com/asphalte.algerie",
+      "Instagram": "https://instagram.com/asphalte_dz",
+      "WhatsApp": "+213 7 93 12 34 56",
+      "Telegram": "https://t.me/asphaltedz",
+      "Email": "asphalte@hotmail.com",
+      "Téléphone": "+213 7 93 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Belabbes",
+      "Facebook": "https://facebook.com/belabbes.industrie",
+      "Instagram": "https://instagram.com/belabbes_dz",
+      "WhatsApp": "+213 5 72 23 45 67",
+      "Telegram": "https://t.me/belabbes",
+      "Email": "belabbes@outlook.dz",
+      "Téléphone": "+213 5 72 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Froid Commercial",
+      "Facebook": "https://facebook.com/froidcommercial.dz",
+      "Instagram": "https://instagram.com/froid_commercial",
+      "WhatsApp": "+213 6 83 34 56 78",
+      "Telegram": "https://t.me/froidcom",
+      "Email": "froid.commercial@gmail.com",
+      "Téléphone": "+213 6 83 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Eshmoun",
+      "Facebook": "https://facebook.com/eshmoun.industries",
+      "Instagram": "https://instagram.com/eshmoun_dz",
+      "WhatsApp": "+213 7 94 45 67 89",
+      "Telegram": "https://t.me/eshmoun",
+      "Email": "eshmoun@live.fr",
+      "Téléphone": "+213 7 94 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Les Moulins de la Mitidja",
+      "Facebook": "https://facebook.com/moulins.mitidja",
+      "Instagram": "https://instagram.com/moulins_mitidja",
+      "WhatsApp": "+213 5 73 56 78 90",
+      "Telegram": "https://t.me/moulinsmitidja",
+      "Email": "mitidja.moulin@yahoo.fr",
+      "Téléphone": "+213 5 73 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Haddad",
+      "Facebook": "https://facebook.com/haddad.industries",
+      "Instagram": "https://instagram.com/haddad_dz",
+      "WhatsApp": "+213 6 84 67 89 01",
+      "Telegram": "https://t.me/haddaddz",
+      "Email": "haddad@hotmail.com",
+      "Téléphone": "+213 6 84 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Timgad Plast",
+      "Facebook": "https://facebook.com/timgadplast",
+      "Instagram": "https://instagram.com/timgad_plast",
+      "WhatsApp": "+213 7 95 78 90 12",
+      "Telegram": "https://t.me/timgadplast",
+      "Email": "timgad.plast@outlook.dz",
+      "Téléphone": "+213 7 95 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Zergoun",
+      "Facebook": "https://facebook.com/zergoun.industrie",
+      "Instagram": "https://instagram.com/zergoun_dz",
+      "WhatsApp": "+213 5 74 89 01 23",
+      "Telegram": "https://t.me/zergoun",
+      "Email": "zergoun@live.dz",
+      "Téléphone": "+213 5 74 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Paprec DZ",
+      "Facebook": "https://facebook.com/paprec.dz",
+      "Instagram": "https://instagram.com/paprec_dz",
+      "WhatsApp": "+213 6 85 90 12 34",
+      "Telegram": "https://t.me/paprecdz",
+      "Email": "paprec@yahoo.dz",
+      "Téléphone": "+213 6 85 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Grarem",
+      "Facebook": "https://facebook.com/grarem.industrie",
+      "Instagram": "https://instagram.com/grarem_dz",
+      "WhatsApp": "+213 7 96 01 23 45",
+      "Telegram": "https://t.me/grarem",
+      "Email": "grarem@hotmail.com",
+      "Téléphone": "+213 7 96 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Souakri",
+      "Facebook": "https://facebook.com/souakri.industries",
+      "Instagram": "https://instagram.com/souakri_dz",
+      "WhatsApp": "+213 5 75 12 34 56",
+      "Telegram": "https://t.me/souakri",
+      "Email": "souakri@outlook.dz",
+      "Téléphone": "+213 5 75 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Verre et Miroir",
+      "Facebook": "https://facebook.com/verremiroir.dz",
+      "Instagram": "https://instagram.com/verre_miroir_dz",
+      "WhatsApp": "+213 6 86 23 45 67",
+      "Telegram": "https://t.me/verremiroir",
+      "Email": "verre.miroir@live.fr",
+      "Téléphone": "+213 6 86 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Marbre Art",
+      "Facebook": "https://facebook.com/marbre.art.dz",
+      "Instagram": "https://instagram.com/marbre_art_dz",
+      "WhatsApp": "+213 7 97 34 56 78",
+      "Telegram": "https://t.me/marbreart",
+      "Email": "marbre.art@yahoo.fr",
+      "Téléphone": "+213 7 97 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Sarl El Hidhab",
+      "Facebook": "https://facebook.com/elhidhab.industrie",
+      "Instagram": "https://instagram.com/elhidhab_dz",
+      "WhatsApp": "+213 5 76 45 67 89",
+      "Telegram": "https://t.me/elhidhab",
+      "Email": "hidhab@hotmail.com",
+      "Téléphone": "+213 5 76 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Isorex",
+      "Facebook": "https://facebook.com/isorex.dz",
+      "Instagram": "https://instagram.com/isorex_dz",
+      "WhatsApp": "+213 6 87 56 78 90",
+      "Telegram": "https://t.me/isorexdz",
+      "Email": "isorex@outlook.dz",
+      "Téléphone": "+213 6 87 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Sahraoui",
+      "Facebook": "https://facebook.com/sahraoui.industrie",
+      "Instagram": "https://instagram.com/sahraoui_dz",
+      "WhatsApp": "+213 7 98 67 89 01",
+      "Telegram": "https://t.me/sahraoui",
+      "Email": "sahraoui@live.dz",
+      "Téléphone": "+213 7 98 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Berbère",
+      "Facebook": "https://facebook.com/berbere.industrie",
+      "Instagram": "https://instagram.com/berbere_dz",
+      "WhatsApp": "+213 5 77 78 90 12",
+      "Telegram": "https://t.me/berbere",
+      "Email": "berbere@yahoo.dz",
+      "Téléphone": "+213 5 77 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Sarlino",
+      "Facebook": "https://facebook.com/sarlino.dz",
+      "Instagram": "https://instagram.com/sarlino_dz",
+      "WhatsApp": "+213 6 88 89 01 23",
+      "Telegram": "https://t.me/sarlino",
+      "Email": "sarlino@hotmail.com",
+      "Téléphone": "+213 6 88 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Helios",
+      "Facebook": "https://facebook.com/helios.industrie",
+      "Instagram": "https://instagram.com/helios_dz",
+      "WhatsApp": "+213 7 99 90 12 34",
+      "Telegram": "https://t.me/heliosindustrie",
+      "Email": "helios@outlook.dz",
+      "Téléphone": "+213 7 99 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Gaïa",
+      "Facebook": "https://facebook.com/gaia.industrie.dz",
+      "Instagram": "https://instagram.com/gaia_dz",
+      "WhatsApp": "+213 5 78 01 23 45",
+      "Telegram": "https://t.me/gaiadz",
+      "Email": "gaia@live.fr",
+      "Téléphone": "+213 5 78 01 23 45"
+    },
+    {
+      "Nom de l'entreprise": "Sarl MDF",
+      "Facebook": "https://facebook.com/mdf.dz.industrie",
+      "Instagram": "https://instagram.com/mdf_dz",
+      "WhatsApp": "+213 6 89 12 34 56",
+      "Telegram": "https://t.me/mdfindustrie",
+      "Email": "mdf@yahoo.com",
+      "Téléphone": "+213 6 89 12 34 56"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Génération",
+      "Facebook": "https://facebook.com/generation.industrie",
+      "Instagram": "https://instagram.com/generation_dz",
+      "WhatsApp": "+213 7 00 23 45 67",
+      "Telegram": "https://t.me/generationdz",
+      "Email": "generation@hotmail.dz",
+      "Téléphone": "+213 7 00 23 45 67"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Socodam",
+      "Facebook": "https://facebook.com/socodam.dz",
+      "Instagram": "https://instagram.com/socodam_dz",
+      "WhatsApp": "+213 5 79 34 56 78",
+      "Telegram": "https://t.me/socodam",
+      "Email": "socodam@outlook.dz",
+      "Téléphone": "+213 5 79 34 56 78"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Sofrac",
+      "Facebook": "https://facebook.com/sofrac.dz",
+      "Instagram": "https://instagram.com/sofrac_dz",
+      "WhatsApp": "+213 6 90 45 67 89",
+      "Telegram": "https://t.me/sofracdz",
+      "Email": "sofrac@live.dz",
+      "Téléphone": "+213 6 90 45 67 89"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Techni-Plast",
+      "Facebook": "https://facebook.com/techniplast.dz",
+      "Instagram": "https://instagram.com/techniplast_dz",
+      "WhatsApp": "+213 7 01 56 78 90",
+      "Telegram": "https://t.me/techniplast",
+      "Email": "techniplast@yahoo.fr",
+      "Téléphone": "+213 7 01 56 78 90"
+    },
+    {
+      "Nom de l'entreprise": "Sarl SPIE",
+      "Facebook": "https://facebook.com/spie.dz",
+      "Instagram": "https://instagram.com/spie_dz",
+      "WhatsApp": "+213 5 80 67 89 01",
+      "Telegram": "https://t.me/spiedz",
+      "Email": "spie@hotmail.com",
+      "Téléphone": "+213 5 80 67 89 01"
+    },
+    {
+      "Nom de l'entreprise": "Sarl El Amel",
+      "Facebook": "https://facebook.com/elamel.industrie",
+      "Instagram": "https://instagram.com/elamel_dz",
+      "WhatsApp": "+213 6 91 78 90 12",
+      "Telegram": "https://t.me/elamel",
+      "Email": "amel.industrie@outlook.dz",
+      "Téléphone": "+213 6 91 78 90 12"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Wifak Plast",
+      "Facebook": "https://facebook.com/wifak.plast.dz",
+      "Instagram": "https://instagram.com/wifak_plast",
+      "WhatsApp": "+213 7 02 89 01 23",
+      "Telegram": "https://t.me/wifakplast",
+      "Email": "wifak@live.fr",
+      "Téléphone": "+213 7 02 89 01 23"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Cosmeplast",
+      "Facebook": "https://facebook.com/cosmeplast.dz",
+      "Instagram": "https://instagram.com/cosmeplast_dz",
+      "WhatsApp": "+213 5 81 90 12 34",
+      "Telegram": "https://t.me/cosmeplast",
+      "Email": "cosmeplast@yahoo.dz",
+      "Téléphone": "+213 5 81 90 12 34"
+    },
+    {
+      "Nom de l'entreprise": "Sarl Metaflex",
+      "Facebook": "https://facebook.com/metaflex.dz",
+      "Instagram": "https://instagram.com/metaflex_dz",
+      "WhatsApp": "+213 6 92 01 23 45",
+      "Telegram": "https://t.me/metaflex",
+      "Email": "metaflex@hotmail.com",
+      "Téléphone": "+213 6 92 01 23 45"
+    }
+  ],
+  "boutiques": [
+    {
+      "Nom de la boutique": "Boutique El Yasmine",
+      "Facebook": "https://facebook.com/elyasmine.boutique",
+      "Instagram": "https://instagram.com/el_yasmine_dz",
+      "WhatsApp": "+213 5 50 12 34 56",
+      "Telegram": "https://t.me/elyasmine",
+      "Email": "yasmine.boutique@gmail.com",
+      "Téléphone": "+213 5 50 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Boutique Le Kiosque",
+      "Facebook": "https://facebook.com/lekiosque.dz",
+      "Instagram": "https://instagram.com/le_kiosque_dz",
+      "WhatsApp": "+213 6 61 23 45 67",
+      "Telegram": "https://t.me/lekiosque",
+      "Email": "kiosque@yahoo.dz",
+      "Téléphone": "+213 6 61 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Mode Street DZ",
+      "Facebook": "https://facebook.com/modestreet.dz",
+      "Instagram": "https://instagram.com/mode_street_dz",
+      "WhatsApp": "+213 7 72 34 56 78",
+      "Telegram": "https://t.me/modestreet",
+      "Email": "mode.street@hotmail.com",
+      "Téléphone": "+213 7 72 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Boutique Warda",
+      "Facebook": "https://facebook.com/warda.boutique",
+      "Instagram": "https://instagram.com/warda_dz",
+      "WhatsApp": "+213 5 51 45 67 89",
+      "Telegram": "https://t.me/wardaboutique",
+      "Email": "warda@outlook.dz",
+      "Téléphone": "+213 5 51 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Soieries d’Alger",
+      "Facebook": "https://facebook.com/soieries.alger",
+      "Instagram": "https://instagram.com/soieries_alger",
+      "WhatsApp": "+213 6 62 56 78 90",
+      "Telegram": "https://t.me/soieriesalger",
+      "Email": "soieries@live.fr",
+      "Téléphone": "+213 6 62 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Miss Boutique",
+      "Facebook": "https://facebook.com/miss.boutique.dz",
+      "Instagram": "https://instagram.com/miss_boutique_dz",
+      "WhatsApp": "+213 7 73 67 89 01",
+      "Telegram": "https://t.me/missboutique",
+      "Email": "miss.boutique@gmail.com",
+      "Téléphone": "+213 7 73 67 89 01"
+    },
+    {
+      "Nom de la boutique": "La Perle Rare",
+      "Facebook": "https://facebook.com/perlerare.boutique",
+      "Instagram": "https://instagram.com/la_perle_rare_dz",
+      "WhatsApp": "+213 5 52 78 90 12",
+      "Telegram": "https://t.me/perleraredz",
+      "Email": "perle.rare@yahoo.fr",
+      "Téléphone": "+213 5 52 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Bijouterie El Firdaous",
+      "Facebook": "https://facebook.com/elfirdaous.bijou",
+      "Instagram": "https://instagram.com/elfirdaous_dz",
+      "WhatsApp": "+213 6 63 89 01 23",
+      "Telegram": "https://t.me/elfirdaous",
+      "Email": "firdaous.bijou@hotmail.com",
+      "Téléphone": "+213 6 63 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Dar Ameena",
+      "Facebook": "https://facebook.com/darameena.boutique",
+      "Instagram": "https://instagram.com/dar_ameena",
+      "WhatsApp": "+213 7 74 90 12 34",
+      "Telegram": "https://t.me/darameena",
+      "Email": "ameena.boutique@outlook.dz",
+      "Téléphone": "+213 7 74 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Couture El Bahia",
+      "Facebook": "https://facebook.com/couture.elbahia",
+      "Instagram": "https://instagram.com/elbahia_couture",
+      "WhatsApp": "+213 5 53 01 23 45",
+      "Telegram": "https://t.me/elbahiacouture",
+      "Email": "bahia.couture@live.dz",
+      "Téléphone": "+213 5 53 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Boutique Amira",
+      "Facebook": "https://facebook.com/amira.boutique.dz",
+      "Instagram": "https://instagram.com/amira_boutique",
+      "WhatsApp": "+213 6 64 12 34 56",
+      "Telegram": "https://t.me/amiraboutique",
+      "Email": "amira@yahoo.dz",
+      "Téléphone": "+213 6 64 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Le Coin des Affaires",
+      "Facebook": "https://facebook.com/coin.des.affaires",
+      "Instagram": "https://instagram.com/coin_affaires_dz",
+      "WhatsApp": "+213 7 75 23 45 67",
+      "Telegram": "https://t.me/coinaffaires",
+      "Email": "coinaffaires@gmail.com",
+      "Téléphone": "+213 7 75 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Boutique Soleyil",
+      "Facebook": "https://facebook.com/soleyil.boutique",
+      "Instagram": "https://instagram.com/soleyil_dz",
+      "WhatsApp": "+213 5 54 34 56 78",
+      "Telegram": "https://t.me/soleyil",
+      "Email": "soleyil@hotmail.com",
+      "Téléphone": "+213 5 54 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Les Fantaisies de Lina",
+      "Facebook": "https://facebook.com/fantaisies.lina",
+      "Instagram": "https://instagram.com/fantaisies_lina",
+      "WhatsApp": "+213 6 65 45 67 89",
+      "Telegram": "https://t.me/fantaisieslina",
+      "Email": "lina.fantaisies@outlook.dz",
+      "Téléphone": "+213 6 65 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique du Centre",
+      "Facebook": "https://facebook.com/boutique.centre.dz",
+      "Instagram": "https://instagram.com/boutique_centre",
+      "WhatsApp": "+213 7 76 56 78 90",
+      "Telegram": "https://t.me/boutiquecentre",
+      "Email": "centre.boutique@live.fr",
+      "Téléphone": "+213 7 76 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Alimentation Générale DZ",
+      "Facebook": "https://facebook.com/alimentation.dz",
+      "Instagram": "https://instagram.com/alimentation_generale",
+      "WhatsApp": "+213 5 55 67 89 01",
+      "Telegram": "https://t.me/alimentationdz",
+      "Email": "alimentation@yahoo.fr",
+      "Téléphone": "+213 5 55 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Vêtements Sport DZ",
+      "Facebook": "https://facebook.com/vetements.sport.dz",
+      "Instagram": "https://instagram.com/vetements_sport",
+      "WhatsApp": "+213 6 66 78 90 12",
+      "Telegram": "https://t.me/vetementsport",
+      "Email": "vetements.sport@hotmail.com",
+      "Téléphone": "+213 6 66 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Boutique Sabrina",
+      "Facebook": "https://facebook.com/sabrina.boutique.dz",
+      "Instagram": "https://instagram.com/sabrina_boutique",
+      "WhatsApp": "+213 7 77 89 01 23",
+      "Telegram": "https://t.me/sabrinaboutique",
+      "Email": "sabrina@outlook.dz",
+      "Téléphone": "+213 7 77 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Parfumerie Rayan",
+      "Facebook": "https://facebook.com/parfumerie.rayan",
+      "Instagram": "https://instagram.com/rayan_parfums",
+      "WhatsApp": "+213 5 56 90 12 34",
+      "Telegram": "https://t.me/parfumerierayan",
+      "Email": "rayan.parfum@live.dz",
+      "Téléphone": "+213 5 56 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Boutique El Hana",
+      "Facebook": "https://facebook.com/elhana.boutique",
+      "Instagram": "https://instagram.com/elhana_dz",
+      "WhatsApp": "+213 6 67 01 23 45",
+      "Telegram": "https://t.me/elhana",
+      "Email": "elhana@yahoo.dz",
+      "Téléphone": "+213 6 67 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Les Tissus de Didouche",
+      "Facebook": "https://facebook.com/tissus.didouche",
+      "Instagram": "https://instagram.com/tissus_didouche",
+      "WhatsApp": "+213 7 78 12 34 56",
+      "Telegram": "https://t.me/tissusdidouche",
+      "Email": "tissus.didouche@gmail.com",
+      "Téléphone": "+213 7 78 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Boutique Imane",
+      "Facebook": "https://facebook.com/imane.boutique.dz",
+      "Instagram": "https://instagram.com/imane_boutique",
+      "WhatsApp": "+213 5 57 23 45 67",
+      "Telegram": "https://t.me/imaneboutique",
+      "Email": "imane.boutique@hotmail.com",
+      "Téléphone": "+213 5 57 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Librairie El Maarifa",
+      "Facebook": "https://facebook.com/librairie.elmaarifa",
+      "Instagram": "https://instagram.com/elmaarifa_librairie",
+      "WhatsApp": "+213 6 68 34 56 78",
+      "Telegram": "https://t.me/elmaarifa",
+      "Email": "maarifa.livres@outlook.dz",
+      "Téléphone": "+213 6 68 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Accessoires Mode DZ",
+      "Facebook": "https://facebook.com/accessoires.mode.dz",
+      "Instagram": "https://instagram.com/accessoires_mode",
+      "WhatsApp": "+213 7 79 45 67 89",
+      "Telegram": "https://t.me/accessoiresmode",
+      "Email": "accessoires@live.fr",
+      "Téléphone": "+213 7 79 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique Le Palais",
+      "Facebook": "https://facebook.com/palais.boutique.dz",
+      "Instagram": "https://instagram.com/palais_boutique",
+      "WhatsApp": "+213 5 58 56 78 90",
+      "Telegram": "https://t.me/palaisboutique",
+      "Email": "palais@yahoo.fr",
+      "Téléphone": "+213 5 58 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Prêt-à-Porter Inaya",
+      "Facebook": "https://facebook.com/inaya.pretaporter",
+      "Instagram": "https://instagram.com/inaya_dz",
+      "WhatsApp": "+213 6 69 67 89 01",
+      "Telegram": "https://t.me/inayadz",
+      "Email": "inaya@hotmail.com",
+      "Téléphone": "+213 6 69 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Boutique du Soleil",
+      "Facebook": "https://facebook.com/boutique.soleil.dz",
+      "Instagram": "https://instagram.com/boutique_soleil",
+      "WhatsApp": "+213 7 80 78 90 12",
+      "Telegram": "https://t.me/boutiquesoleil",
+      "Email": "soleil.boutique@outlook.dz",
+      "Téléphone": "+213 7 80 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Maroquinerie El Djazair",
+      "Facebook": "https://facebook.com/maroquinerie.djazair",
+      "Instagram": "https://instagram.com/maroquinerie_dz",
+      "WhatsApp": "+213 5 59 89 01 23",
+      "Telegram": "https://t.me/maroquineriedz",
+      "Email": "maroquinerie@live.dz",
+      "Téléphone": "+213 5 59 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Boutique Flower",
+      "Facebook": "https://facebook.com/flower.boutique.dz",
+      "Instagram": "https://instagram.com/flower_dz",
+      "WhatsApp": "+213 6 70 90 12 34",
+      "Telegram": "https://t.me/flowerboutique",
+      "Email": "flower@yahoo.dz",
+      "Téléphone": "+213 6 70 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Décoration Intérieure",
+      "Facebook": "https://facebook.com/deco.interieure.dz",
+      "Instagram": "https://instagram.com/deco_interieure",
+      "WhatsApp": "+213 7 81 01 23 45",
+      "Telegram": "https://t.me/decointerieure",
+      "Email": "deco.interieure@gmail.com",
+      "Téléphone": "+213 7 81 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Bijoux Berbères",
+      "Facebook": "https://facebook.com/bijoux.berberes",
+      "Instagram": "https://instagram.com/bijoux_berberes",
+      "WhatsApp": "+213 5 60 12 34 56",
+      "Telegram": "https://t.me/bijouxberberes",
+      "Email": "bijoux.berberes@hotmail.com",
+      "Téléphone": "+213 5 60 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Boutique Nour",
+      "Facebook": "https://facebook.com/nour.boutique.dz",
+      "Instagram": "https://instagram.com/nour_boutique",
+      "WhatsApp": "+213 6 71 23 45 67",
+      "Telegram": "https://t.me/nourboutique",
+      "Email": "nour@outlook.dz",
+      "Téléphone": "+213 6 71 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Épicerie Fine Saveurs",
+      "Facebook": "https://facebook.com/epicerie.fine.dz",
+      "Instagram": "https://instagram.com/epicerie_fine_dz",
+      "WhatsApp": "+213 7 82 34 56 78",
+      "Telegram": "https://t.me/epiceriefine",
+      "Email": "epicerie.fine@live.fr",
+      "Téléphone": "+213 7 82 34 56 78"
+    },
+    {
+      "Nom de la boutique": "La Boutique du Cadeau",
+      "Facebook": "https://facebook.com/boutique.cadeau.dz",
+      "Instagram": "https://instagram.com/cadeau_dz",
+      "WhatsApp": "+213 5 61 45 67 89",
+      "Telegram": "https://t.me/boutiquecadeau",
+      "Email": "cadeau@yahoo.fr",
+      "Téléphone": "+213 5 61 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique Féerique",
+      "Facebook": "https://facebook.com/feerique.boutique",
+      "Instagram": "https://instagram.com/feerique_dz",
+      "WhatsApp": "+213 6 72 56 78 90",
+      "Telegram": "https://t.me/feerique",
+      "Email": "feerique@hotmail.com",
+      "Téléphone": "+213 6 72 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Cordonnerie Moderne",
+      "Facebook": "https://facebook.com/cordonnerie.moderne",
+      "Instagram": "https://instagram.com/cordonnerie_moderne",
+      "WhatsApp": "+213 7 83 67 89 01",
+      "Telegram": "https://t.me/cordonneriemoderne",
+      "Email": "cordonnerie.moderne@gmail.com",
+      "Téléphone": "+213 7 83 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Boutique el Qods",
+      "Facebook": "https://facebook.com/elqods.boutique",
+      "Instagram": "https://instagram.com/elqods_dz",
+      "WhatsApp": "+213 5 62 78 90 12",
+      "Telegram": "https://t.me/elqods",
+      "Email": "elqods@outlook.dz",
+      "Téléphone": "+213 5 62 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Vêtements Enfants DZ",
+      "Facebook": "https://facebook.com/vetements.enfants.dz",
+      "Instagram": "https://instagram.com/vetements_enfants",
+      "WhatsApp": "+213 6 73 89 01 23",
+      "Telegram": "https://t.me/vetementsenfants",
+      "Email": "enfants.vetements@live.dz",
+      "Téléphone": "+213 6 73 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Boutique du Miel",
+      "Facebook": "https://facebook.com/boutique.dumiel",
+      "Instagram": "https://instagram.com/boutique_miel",
+      "WhatsApp": "+213 7 84 90 12 34",
+      "Telegram": "https://t.me/boutiquemiel",
+      "Email": "miel.boutique@yahoo.dz",
+      "Téléphone": "+213 7 84 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Tapis d’Art",
+      "Facebook": "https://facebook.com/tapis.dart.dz",
+      "Instagram": "https://instagram.com/tapis_art_dz",
+      "WhatsApp": "+213 5 63 01 23 45",
+      "Telegram": "https://t.me/tapisart",
+      "Email": "tapis.art@hotmail.com",
+      "Téléphone": "+213 5 63 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Boutique Malika",
+      "Facebook": "https://facebook.com/malika.boutique.dz",
+      "Instagram": "https://instagram.com/malika_boutique",
+      "WhatsApp": "+213 6 74 12 34 56",
+      "Telegram": "https://t.me/malikaboutique",
+      "Email": "malika@outlook.dz",
+      "Téléphone": "+213 6 74 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Prêt-à-Porter Chahinez",
+      "Facebook": "https://facebook.com/chahinez.mode",
+      "Instagram": "https://instagram.com/chahinez_dz",
+      "WhatsApp": "+213 7 85 23 45 67",
+      "Telegram": "https://t.me/chahinez",
+      "Email": "mode.chahinez@live.fr",
+      "Téléphone": "+213 7 85 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Boutique Tendances",
+      "Facebook": "https://facebook.com/tendances.boutique.dz",
+      "Instagram": "https://instagram.com/tendances_dz",
+      "WhatsApp": "+213 5 64 34 56 78",
+      "Telegram": "https://t.me/tendancesboutique",
+      "Email": "tendances@yahoo.fr",
+      "Téléphone": "+213 5 64 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Miel du Djurdjura",
+      "Facebook": "https://facebook.com/miel.djurdjura",
+      "Instagram": "https://instagram.com/miel_djurdjura",
+      "WhatsApp": "+213 6 75 45 67 89",
+      "Telegram": "https://t.me/mieldjurdjura",
+      "Email": "miel.djurdjura@hotmail.com",
+      "Téléphone": "+213 6 75 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique du Thé",
+      "Facebook": "https://facebook.com/boutique.duthe",
+      "Instagram": "https://instagram.com/boutique_the",
+      "WhatsApp": "+213 7 86 56 78 90",
+      "Telegram": "https://t.me/boutiquethe",
+      "Email": "the.boutique@gmail.com",
+      "Téléphone": "+213 7 86 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Librairie du Savoir",
+      "Facebook": "https://facebook.com/librairie.savoir",
+      "Instagram": "https://instagram.com/librairie_savoir",
+      "WhatsApp": "+213 5 65 67 89 01",
+      "Telegram": "https://t.me/librairiesavoir",
+      "Email": "savoir.livres@outlook.dz",
+      "Téléphone": "+213 5 65 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Boutique de la Plage",
+      "Facebook": "https://facebook.com/boutique.plage.dz",
+      "Instagram": "https://instagram.com/boutique_plage",
+      "WhatsApp": "+213 6 76 78 90 12",
+      "Telegram": "https://t.me/boutiqueplage",
+      "Email": "plage.boutique@live.dz",
+      "Téléphone": "+213 6 76 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Cosmétiques Natures",
+      "Facebook": "https://facebook.com/cosmetiques.nature",
+      "Instagram": "https://instagram.com/cosmetiques_dz",
+      "WhatsApp": "+213 7 87 89 01 23",
+      "Telegram": "https://t.me/cosmetiquesdz",
+      "Email": "nature.cosmetiques@yahoo.dz",
+      "Téléphone": "+213 7 87 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Boutique El Falah",
+      "Facebook": "https://facebook.com/elfalah.boutique",
+      "Instagram": "https://instagram.com/elfalah_dz",
+      "WhatsApp": "+213 5 66 90 12 34",
+      "Telegram": "https://t.me/elfalah",
+      "Email": "falah@hotmail.com",
+      "Téléphone": "+213 5 66 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Pâtisserie Orientale",
+      "Facebook": "https://facebook.com/patisserie.orientale.dz",
+      "Instagram": "https://instagram.com/patisserie_orientale",
+      "WhatsApp": "+213 6 77 01 23 45",
+      "Telegram": "https://t.me/patisserieorientale",
+      "Email": "patisserie.orientale@outlook.dz",
+      "Téléphone": "+213 6 77 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Boutique El Mountada",
+      "Facebook": "https://facebook.com/elmountada.boutique",
+      "Instagram": "https://instagram.com/elmountada_dz",
+      "WhatsApp": "+213 7 88 12 34 56",
+      "Telegram": "https://t.me/elmountada",
+      "Email": "mountada@live.fr",
+      "Téléphone": "+213 7 88 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Jouets El Mahdi",
+      "Facebook": "https://facebook.com/jouets.elmahdi",
+      "Instagram": "https://instagram.com/jouets_mahdi",
+      "WhatsApp": "+213 5 67 23 45 67",
+      "Telegram": "https://t.me/jouetsmahdi",
+      "Email": "mahdi.jouets@yahoo.fr",
+      "Téléphone": "+213 5 67 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Boutique El Madina",
+      "Facebook": "https://facebook.com/elmadina.boutique.dz",
+      "Instagram": "https://instagram.com/elmadina_dz",
+      "WhatsApp": "+213 6 78 34 56 78",
+      "Telegram": "https://t.me/elmadinaboutique",
+      "Email": "madina.boutique@hotmail.com",
+      "Téléphone": "+213 6 78 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Mode Homme DZ",
+      "Facebook": "https://facebook.com/mode.homme.dz",
+      "Instagram": "https://instagram.com/mode_homme_dz",
+      "WhatsApp": "+213 7 89 45 67 89",
+      "Telegram": "https://t.me/modehommedz",
+      "Email": "mode.homme@outlook.dz",
+      "Téléphone": "+213 7 89 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique Selsabil",
+      "Facebook": "https://facebook.com/selsabil.boutique",
+      "Instagram": "https://instagram.com/selsabil_dz",
+      "WhatsApp": "+213 5 68 56 78 90",
+      "Telegram": "https://t.me/selsabilboutique",
+      "Email": "selsabil@live.dz",
+      "Téléphone": "+213 5 68 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Fleuriste El Warda",
+      "Facebook": "https://facebook.com/fleuriste.elwarda",
+      "Instagram": "https://instagram.com/elwarda_fleurs",
+      "WhatsApp": "+213 6 79 67 89 01",
+      "Telegram": "https://t.me/elwardafleurs",
+      "Email": "warda.fleurs@yahoo.dz",
+      "Téléphone": "+213 6 79 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Boutique Zina",
+      "Facebook": "https://facebook.com/zina.boutique.dz",
+      "Instagram": "https://instagram.com/zina_boutique",
+      "WhatsApp": "+213 7 90 78 90 12",
+      "Telegram": "https://t.me/zinaboutique",
+      "Email": "zina@hotmail.com",
+      "Téléphone": "+213 7 90 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Épicerie du Terroir",
+      "Facebook": "https://facebook.com/epicerie.terroir",
+      "Instagram": "https://instagram.com/epicerie_terroir",
+      "WhatsApp": "+213 5 69 89 01 23",
+      "Telegram": "https://t.me/epicerieduterroir",
+      "Email": "terroir.epicerie@outlook.dz",
+      "Téléphone": "+213 5 69 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Boutique El Kawther",
+      "Facebook": "https://facebook.com/elkawther.boutique",
+      "Instagram": "https://instagram.com/elkawther_dz",
+      "WhatsApp": "+213 6 80 90 12 34",
+      "Telegram": "https://t.me/elkawther",
+      "Email": "kawther@live.fr",
+      "Téléphone": "+213 6 80 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Linge de Maison DZ",
+      "Facebook": "https://facebook.com/linge.maison.dz",
+      "Instagram": "https://instagram.com/linge_maison",
+      "WhatsApp": "+213 7 91 01 23 45",
+      "Telegram": "https://t.me/lingemaison",
+      "Email": "linge.maison@yahoo.fr",
+      "Téléphone": "+213 7 91 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Boutique Rahma",
+      "Facebook": "https://facebook.com/rahma.boutique.dz",
+      "Instagram": "https://instagram.com/rahma_dz",
+      "WhatsApp": "+213 5 70 12 34 56",
+      "Telegram": "https://t.me/rahmaboutique",
+      "Email": "rahma@hotmail.com",
+      "Téléphone": "+213 5 70 12 34 56"
+    },
+    {
+      "Nom de la boutique": "La Malle aux Trésors",
+      "Facebook": "https://facebook.com/lamalleauxtresors",
+      "Instagram": "https://instagram.com/malle_aux_tresors",
+      "WhatsApp": "+213 6 81 23 45 67",
+      "Telegram": "https://t.me/malletresors",
+      "Email": "tresors.malle@outlook.dz",
+      "Téléphone": "+213 6 81 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Boutique El Afrah",
+      "Facebook": "https://facebook.com/elafrah.boutique",
+      "Instagram": "https://instagram.com/elafrah_dz",
+      "WhatsApp": "+213 7 92 34 56 78",
+      "Telegram": "https://t.me/elafrah",
+      "Email": "afrah@live.dz",
+      "Téléphone": "+213 7 92 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Accessoires Filles DZ",
+      "Facebook": "https://facebook.com/accessoires.filles.dz",
+      "Instagram": "https://instagram.com/accessoires_filles",
+      "WhatsApp": "+213 5 71 45 67 89",
+      "Telegram": "https://t.me/accessoiresfilles",
+      "Email": "filles.accessoires@yahoo.dz",
+      "Téléphone": "+213 5 71 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique Dar Souk",
+      "Facebook": "https://facebook.com/darsouk.boutique",
+      "Instagram": "https://instagram.com/dar_souk_dz",
+      "WhatsApp": "+213 6 82 56 78 90",
+      "Telegram": "https://t.me/darsouk",
+      "Email": "souk.dar@hotmail.com",
+      "Téléphone": "+213 6 82 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Parfumerie El Khalil",
+      "Facebook": "https://facebook.com/parfumerie.elkhalil",
+      "Instagram": "https://instagram.com/elkhalil_parfums",
+      "WhatsApp": "+213 7 93 67 89 01",
+      "Telegram": "https://t.me/elkhalilparfum",
+      "Email": "khalil.parfum@outlook.dz",
+      "Téléphone": "+213 7 93 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Boutique du Tapis",
+      "Facebook": "https://facebook.com/boutique.tapis.dz",
+      "Instagram": "https://instagram.com/boutique_tapis",
+      "WhatsApp": "+213 5 72 78 90 12",
+      "Telegram": "https://t.me/boutiquetapis",
+      "Email": "tapis.boutique@live.fr",
+      "Téléphone": "+213 5 72 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Boutique Sana",
+      "Facebook": "https://facebook.com/sana.boutique.dz",
+      "Instagram": "https://instagram.com/sana_boutique",
+      "WhatsApp": "+213 6 83 89 01 23",
+      "Telegram": "https://t.me/sanaboutique",
+      "Email": "sana@yahoo.dz",
+      "Téléphone": "+213 6 83 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Frip’Art",
+      "Facebook": "https://facebook.com/fripart.boutique",
+      "Instagram": "https://instagram.com/fripart_dz",
+      "WhatsApp": "+213 7 94 90 12 34",
+      "Telegram": "https://t.me/fripart",
+      "Email": "fripart@hotmail.com",
+      "Téléphone": "+213 7 94 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Boutique Aromates",
+      "Facebook": "https://facebook.com/aromates.boutique",
+      "Instagram": "https://instagram.com/aromates_dz",
+      "WhatsApp": "+213 5 73 01 23 45",
+      "Telegram": "https://t.me/aromates",
+      "Email": "aromates@outlook.dz",
+      "Téléphone": "+213 5 73 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Produits de Beauté DZ",
+      "Facebook": "https://facebook.com/produits.beaute.dz",
+      "Instagram": "https://instagram.com/produits_beaute_dz",
+      "WhatsApp": "+213 6 84 12 34 56",
+      "Telegram": "https://t.me/produitsbeautedz",
+      "Email": "produits.beaute@gmail.com",
+      "Téléphone": "+213 6 84 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Boutique Jasmin",
+      "Facebook": "https://facebook.com/jasmin.boutique.dz",
+      "Instagram": "https://instagram.com/jasmin_boutique",
+      "WhatsApp": "+213 7 95 23 45 67",
+      "Telegram": "https://t.me/jasminboutique",
+      "Email": "jasmin@live.fr",
+      "Téléphone": "+213 7 95 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Boutique d’Or",
+      "Facebook": "https://facebook.com/boutiquedor.dz",
+      "Instagram": "https://instagram.com/boutique_dor_dz",
+      "WhatsApp": "+213 5 74 34 56 78",
+      "Telegram": "https://t.me/boutiquedor",
+      "Email": "boutiquedor@yahoo.fr",
+      "Téléphone": "+213 5 74 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Élégance DZ",
+      "Facebook": "https://facebook.com/elegancedz.boutique",
+      "Instagram": "https://instagram.com/elegance_dz",
+      "WhatsApp": "+213 6 85 45 67 89",
+      "Telegram": "https://t.me/elegancedz",
+      "Email": "elegancedz@outlook.com",
+      "Téléphone": "+213 6 85 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Bébé Câlin",
+      "Facebook": "https://facebook.com/bebecalin.dz",
+      "Instagram": "https://instagram.com/bebe_calin_dz",
+      "WhatsApp": "+213 7 96 56 78 90",
+      "Telegram": "https://t.me/bebecalin",
+      "Email": "bebecalin@gmail.com",
+      "Téléphone": "+213 7 96 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Les Douceurs de Blida",
+      "Facebook": "https://facebook.com/douceursblida",
+      "Instagram": "https://instagram.com/douceurs_de_blida",
+      "WhatsApp": "+213 5 75 67 89 01",
+      "Telegram": "https://t.me/douceursblida",
+      "Email": "douceurs.blida@hotmail.com",
+      "Téléphone": "+213 5 75 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Couture et Tradition",
+      "Facebook": "https://facebook.com/couturetradition.dz",
+      "Instagram": "https://instagram.com/couture_tradition",
+      "WhatsApp": "+213 6 86 78 90 12",
+      "Telegram": "https://t.me/couturetradition",
+      "Email": "couture.tradition@live.dz",
+      "Téléphone": "+213 6 86 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Fleur de Lys",
+      "Facebook": "https://facebook.com/fleurdelys.boutique",
+      "Instagram": "https://instagram.com/fleur_de_lys_dz",
+      "WhatsApp": "+213 7 97 89 01 23",
+      "Telegram": "https://t.me/fleurdelys",
+      "Email": "fleurdelys@yahoo.dz",
+      "Téléphone": "+213 7 97 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Chaussures Chic",
+      "Facebook": "https://facebook.com/chaussureschic.dz",
+      "Instagram": "https://instagram.com/chaussures_chic",
+      "WhatsApp": "+213 5 76 90 12 34",
+      "Telegram": "https://t.me/chaussureschic",
+      "Email": "chic.chaussures@outlook.dz",
+      "Téléphone": "+213 5 76 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Épices et Saveurs",
+      "Facebook": "https://facebook.com/epicessaveurs.dz",
+      "Instagram": "https://instagram.com/epices_saveurs",
+      "WhatsApp": "+213 6 87 01 23 45",
+      "Telegram": "https://t.me/epicessaveurs",
+      "Email": "epices.saveurs@gmail.com",
+      "Téléphone": "+213 6 87 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Parfums d’Orient",
+      "Facebook": "https://facebook.com/parfumsdorient.dz",
+      "Instagram": "https://instagram.com/parfums_orient",
+      "WhatsApp": "+213 7 98 12 34 56",
+      "Telegram": "https://t.me/parfumsorient",
+      "Email": "parfums.orient@live.fr",
+      "Téléphone": "+213 7 98 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Boutique Horizon",
+      "Facebook": "https://facebook.com/horizon.boutique.dz",
+      "Instagram": "https://instagram.com/horizon_boutique",
+      "WhatsApp": "+213 5 77 23 45 67",
+      "Telegram": "https://t.me/horizonboutique",
+      "Email": "horizon@yahoo.fr",
+      "Téléphone": "+213 5 77 23 45 67"
+    },
+    {
+      "Nom de la boutique": "L’Atelier de Couture",
+      "Facebook": "https://facebook.com/ateliercouture.dz",
+      "Instagram": "https://instagram.com/atelier_couture_dz",
+      "WhatsApp": "+213 6 88 34 56 78",
+      "Telegram": "https://t.me/ateliercouture",
+      "Email": "atelier.couture@hotmail.com",
+      "Téléphone": "+213 6 88 34 56 78"
+    },
+    {
+      "Nom de la boutique": "La Caverne d’Ali Baba",
+      "Facebook": "https://facebook.com/cavernealibaba.dz",
+      "Instagram": "https://instagram.com/caverne_alibaba",
+      "WhatsApp": "+213 7 99 45 67 89",
+      "Telegram": "https://t.me/cavernealibaba",
+      "Email": "alibaba@outlook.com",
+      "Téléphone": "+213 7 99 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Boutique Iris",
+      "Facebook": "https://facebook.com/iris.boutique.dz",
+      "Instagram": "https://instagram.com/iris_boutique",
+      "WhatsApp": "+213 5 78 56 78 90",
+      "Telegram": "https://t.me/irisboutique",
+      "Email": "iris@live.dz",
+      "Téléphone": "+213 5 78 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Bijouterie l’Étoile",
+      "Facebook": "https://facebook.com/bijouterie.letoile",
+      "Instagram": "https://instagram.com/bijouterie_letoile",
+      "WhatsApp": "+213 6 89 67 89 01",
+      "Telegram": "https://t.me/bijouterieletoile",
+      "Email": "letoile.bijoux@gmail.com",
+      "Téléphone": "+213 6 89 67 89 01"
+    },
+    {
+      "Nom de la boutique": "Boutique Orchidélia",
+      "Facebook": "https://facebook.com/orchidelia.dz",
+      "Instagram": "https://instagram.com/orchidelia_boutique",
+      "WhatsApp": "+213 7 70 78 90 12",
+      "Telegram": "https://t.me/orchidelia",
+      "Email": "orchidelia@yahoo.dz",
+      "Téléphone": "+213 7 70 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Prêt-à-Porter Lina",
+      "Facebook": "https://facebook.com/pretaporterlina.dz",
+      "Instagram": "https://instagram.com/pret_a_porter_lina",
+      "WhatsApp": "+213 5 79 89 01 23",
+      "Telegram": "https://t.me/pretaporterlina",
+      "Email": "lina.pretaporter@outlook.dz",
+      "Téléphone": "+213 5 79 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Boutique Belle de Jour",
+      "Facebook": "https://facebook.com/belledejour.dz",
+      "Instagram": "https://instagram.com/belle_de_jour_dz",
+      "WhatsApp": "+213 6 90 90 12 34",
+      "Telegram": "https://t.me/belledejour",
+      "Email": "belledejour@hotmail.com",
+      "Téléphone": "+213 6 90 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Jouets et Rêves",
+      "Facebook": "https://facebook.com/jouetsreves.dz",
+      "Instagram": "https://instagram.com/jouets_reves",
+      "WhatsApp": "+213 7 71 01 23 45",
+      "Telegram": "https://t.me/jouetsreves",
+      "Email": "jouets.reves@live.fr",
+      "Téléphone": "+213 7 71 01 23 45"
+    },
+    {
+      "Nom de la boutique": "Au Coin Fleuri",
+      "Facebook": "https://facebook.com/coinfleuri.dz",
+      "Instagram": "https://instagram.com/coin_fleuri_dz",
+      "WhatsApp": "+213 5 80 12 34 56",
+      "Telegram": "https://t.me/coinfleuri",
+      "Email": "coinfleuri@yahoo.fr",
+      "Téléphone": "+213 5 80 12 34 56"
+    },
+    {
+      "Nom de la boutique": "Boutique Améthyste",
+      "Facebook": "https://facebook.com/amethyste.boutique",
+      "Instagram": "https://instagram.com/amethyste_dz",
+      "WhatsApp": "+213 6 91 23 45 67",
+      "Telegram": "https://t.me/amethystedz",
+      "Email": "amethyste@outlook.com",
+      "Téléphone": "+213 6 91 23 45 67"
+    },
+    {
+      "Nom de la boutique": "Mode & Style Alger",
+      "Facebook": "https://facebook.com/modestylealger",
+      "Instagram": "https://instagram.com/mode_style_alger",
+      "WhatsApp": "+213 7 72 34 56 78",
+      "Telegram": "https://t.me/modestylealger",
+      "Email": "mode.style@gmail.com",
+      "Téléphone": "+213 7 72 34 56 78"
+    },
+    {
+      "Nom de la boutique": "Boutique Turquoise",
+      "Facebook": "https://facebook.com/turquoise.boutique",
+      "Instagram": "https://instagram.com/turquoise_dz",
+      "WhatsApp": "+213 5 81 45 67 89",
+      "Telegram": "https://t.me/turquoiseboutique",
+      "Email": "turquoise@hotmail.com",
+      "Téléphone": "+213 5 81 45 67 89"
+    },
+    {
+      "Nom de la boutique": "Le Bazar de Constantine",
+      "Facebook": "https://facebook.com/bazarconstantine",
+      "Instagram": "https://instagram.com/bazar_constantine",
+      "WhatsApp": "+213 6 92 56 78 90",
+      "Telegram": "https://t.me/bazarconstantine",
+      "Email": "bazar.constantine@live.dz",
+      "Téléphone": "+213 6 92 56 78 90"
+    },
+    {
+      "Nom de la boutique": "Boutique Camélia",
+      "Facebook": "https://facebook.com/camelia.boutique.dz",
+      "Instagram": "https://instagram.com/camelia_boutique",
+      "WhatsApp": "+213 7 73 67 89 01",
+      "Telegram": "https://t.me/cameliaboutique",
+      "Email": "camelia@yahoo.dz",
+      "Téléphone": "+213 7 73 67 89 01"
+    },
+    {
+      "Nom de la boutique": "L’Atelier du Sabot",
+      "Facebook": "https://facebook.com/ateliersabot.dz",
+      "Instagram": "https://instagram.com/atelier_sabot",
+      "WhatsApp": "+213 5 82 78 90 12",
+      "Telegram": "https://t.me/ateliersabot",
+      "Email": "sabot@outlook.dz",
+      "Téléphone": "+213 5 82 78 90 12"
+    },
+    {
+      "Nom de la boutique": "Boutique Myosotis",
+      "Facebook": "https://facebook.com/myosotis.boutique",
+      "Instagram": "https://instagram.com/myosotis_dz",
+      "WhatsApp": "+213 6 93 89 01 23",
+      "Telegram": "https://t.me/myosotisdz",
+      "Email": "myosotis@gmail.com",
+      "Téléphone": "+213 6 93 89 01 23"
+    },
+    {
+      "Nom de la boutique": "Aux Trésors d’Oran",
+      "Facebook": "https://facebook.com/tresorsoran.boutique",
+      "Instagram": "https://instagram.com/tresors_d_oran",
+      "WhatsApp": "+213 7 74 90 12 34",
+      "Telegram": "https://t.me/tresorsoran",
+      "Email": "tresors.oran@hotmail.com",
+      "Téléphone": "+213 7 74 90 12 34"
+    },
+    {
+      "Nom de la boutique": "Boutique Lilas",
+      "Facebook": "https://facebook.com/lilas.boutique.dz",
+      "Instagram": "https://instagram.com/lilas_boutique_dz",
+      "WhatsApp": "+213 5 83 01 23 45",
+      "Telegram": "https://t.me/lilasboutique",
+      "Email": "lilas@live.fr",
+      "Téléphone": "+213 5 83 01 23 45"
+    }
+  ]
+};
+
+    let currentCategory = 'restaurants';
+    let searchQuery = '';
+    let currentPage = 1;
+    let rowsPerPage = 25;
+    let filteredData = [];
+
+    // SVG icons helper
+    const icons = {
+      fb: `<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
+      ig: `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>`,
+      wa: `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>`,
+      tg: `<svg viewBox="0 0 24 24"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12zm5.894-17.653c-.156.927-.798 4.717-1.12 6.442-.136.728-.406.972-.666.996-.566.052-1.0-.276-1.547-.636-.857-.563-1.34-.91-2.173-1.46-.962-.635-.339-.985.21-1.556.143-.15 2.63-2.41 2.678-2.616.006-.025.01-.12-.05-.175s-.15-.035-.213-.021c-.09.02-1.52.965-4.29 2.836-.407.28-.775.416-1.106.41-.365-.008-1.066-.207-1.588-.377-.64-.209-1.15-.32-1.105-.676.024-.185.277-.375.76-.57 2.97-1.292 4.95-2.146 5.94-2.563 2.825-1.19 3.41-1.4 3.793-1.4.084 0 .273.02.395.12s.156.242.164.347c.007.098.01.203.003.312z"/></svg>`
+    };
+
+    function init() {
+      // Set values on dashboard
+      document.getElementById('count-restaurants').innerText = database.restaurants.length;
+      document.getElementById('count-companies').innerText = database.companies.length;
+      document.getElementById('count-boutiques').innerText = database.boutiques.length;
+
+      filterAndRender();
+    }
+
+    function switchCategory(category) {
+      currentCategory = category;
+      currentPage = 1;
+      
+      // Update active tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('tab-' + category).classList.add('active');
+
+      filterAndRender();
+    }
+
+    function changeRowsPerPage(val) {
+      rowsPerPage = parseInt(val);
+      currentPage = 1;
+      renderTable();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.toLowerCase().trim();
+      currentPage = 1;
+      filterAndRender();
+    }
+
+    function filterAndRender() {
+      const data = database[currentCategory];
+      if (!searchQuery) {
+        filteredData = [...data];
+      } else {
+        filteredData = data.filter(item => {
+          // search across all columns
+          return Object.values(item).some(fieldVal => {
+            return String(fieldVal).toLowerCase().includes(searchQuery);
+          });
+        });
+      }
+
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('table-body');
+      const mobileContainer = document.getElementById('mobile-cards-container');
+      const emptyState = document.getElementById('empty-state');
+      
+      tbody.innerHTML = '';
+      mobileContainer.innerHTML = '';
+
+      if (filteredData.length === 0) {
+        emptyState.style.display = 'flex';
+        document.getElementById('table-stats-summary').innerHTML = 'Aucun élément à afficher';
+        document.getElementById('pagination-controls').innerHTML = '';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      const totalItems = filteredData.length;
+      const totalPages = Math.ceil(totalItems / rowsPerPage);
+      
+      // Ensure currentPage is valid
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * rowsPerPage;
+      const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
+      const pageItems = filteredData.slice(startIndex, endIndex);
+
+      // Render statistics summary text
+      document.getElementById('table-stats-summary').innerHTML = 
+        `Affichage de <span>${startIndex + 1} - ${endIndex}</span> sur <span>${totalItems}</span> entrées`;
+
+      pageItems.forEach(item => {
+        // Find key names depending on dataset schema
+        const nameField = item["Nom du restaurant"] || item["Nom de l'entreprise"] || item["Nom de la boutique"] || item["Nom"];
+        const phoneField = item["Téléphone"] || '';
+        const emailField = item["Email"] || '';
+        const fbField = item["Facebook"] || '';
+        const igField = item["Instagram"] || '';
+        const waField = item["WhatsApp"] || '';
+        const tgField = item["Telegram"] || '';
+
+        // Build Social HTML
+        const socialHTML = `
+          <div class="social-group" style="justify-content: center;">
+            ${fbField ? `<a class="social-btn fb" href="${fbField}" target="_blank" title="Facebook">${icons.fb}</a>` : ''}
+            ${igField ? `<a class="social-btn ig" href="${igField}" target="_blank" title="Instagram">${icons.ig}</a>` : ''}
+            ${waField ? `<a class="social-btn wa" href="https://wa.me/${waField.replace(/\s+/g, '')}" target="_blank" title="WhatsApp">${icons.wa}</a>` : ''}
+            ${tgField ? `<a class="social-btn tg" href="${tgField}" target="_blank" title="Telegram">${icons.tg}</a>` : ''}
+          </div>
+        `;
+
+        // Desktop Row HTML
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="col-name">${nameField}</td>
+          <td>
+            ${emailField ? `<a class="email-link" href="mailto:${emailField}">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <span class="col-email">${emailField}</span>
+            </a>` : '<span style="color: var(--text-muted); font-style: italic;">Aucun</span>'}
+          </td>
+          <td>
+            ${phoneField ? `<a class="phone-link" href="tel:${phoneField.replace(/\s+/g, '')}">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+              ${phoneField}
+            </a>` : '<span style="color: var(--text-muted); font-style: italic;">Aucun</span>'}
+          </td>
+          <td>${socialHTML}</td>
+        `;
+        tbody.appendChild(tr);
+
+        // Mobile Card HTML
+        const card = document.createElement('div');
+        card.className = 'mobile-card';
+        card.innerHTML = `
+          <div class="mobile-card-header">
+            <div class="mobile-card-title">${nameField}</div>
+          </div>
+          <div class="mobile-card-body">
+            <div class="mobile-field">
+              <span class="mobile-label">Email</span>
+              ${emailField ? `<a class="email-link" href="mailto:${emailField}">${emailField}</a>` : '<span style="color: var(--text-muted);">Aucun</span>'}
+            </div>
+            <div class="mobile-field">
+              <span class="mobile-label">Téléphone</span>
+              ${phoneField ? `<a class="phone-link" href="tel:${phoneField.replace(/\s+/g, '')}">${phoneField}</a>` : '<span style="color: var(--text-muted);">Aucun</span>'}
+            </div>
+            <div class="mobile-field" style="margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 0.75rem;">
+              <span class="mobile-label">Réseaux</span>
+              <div class="social-group">
+                ${fbField ? `<a class="social-btn fb" href="${fbField}" target="_blank">${icons.fb}</a>` : ''}
+                ${igField ? `<a class="social-btn ig" href="${igField}" target="_blank">${icons.ig}</a>` : ''}
+                ${waField ? `<a class="social-btn wa" href="https://wa.me/${waField.replace(/\s+/g, '')}" target="_blank">${icons.wa}</a>` : ''}
+                ${tgField ? `<a class="social-btn tg" href="${tgField}" target="_blank">${icons.tg}</a>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        mobileContainer.appendChild(card);
+      });
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      const container = document.getElementById('pagination-controls');
+      container.innerHTML = '';
+
+      if (totalPages <= 1) return;
+
+      // Previous button
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'page-btn';
+      prevBtn.innerHTML = '&laquo;';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => { currentPage--; renderTable(); };
+      container.appendChild(prevBtn);
+
+      // Page numbers (smart pagination, showing max 5 pages around active page)
+      let start = Math.max(1, currentPage - 2);
+      let end = Math.min(totalPages, start + 4);
+      if (end - start < 4) {
+        start = Math.max(1, end - 4);
+      }
+
+      for (let i = start; i <= end; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+        pageBtn.innerText = i;
+        pageBtn.onclick = () => { currentPage = i; renderTable(); };
+        container.appendChild(pageBtn);
+      }
+
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'page-btn';
+      nextBtn.innerHTML = '&raquo;';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => { currentPage++; renderTable(); };
+      container.appendChild(nextBtn);
+    }
+
+    // Helper functions for actions
+    function downloadCSV() {
+      const data = filteredData;
+      if (data.length === 0) return;
+
+      const headers = Object.keys(data[0]);
+      let csvContent = "data:text/csv;charset=utf-8,";
+      
+      // Header row
+      csvContent += headers.map(h => `"${h.replace(/"/g, '""')}"`).join(",") + "\r\n";
+      
+      // Data rows
+      data.forEach(item => {
+        const row = headers.map(h => {
+          const val = item[h] || "";
+          return `"${val.replace(/"/g, '""')}"`;
+        });
+        csvContent += row.join(",") + "\r\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      
+      const catNames = {
+        restaurants: 'restaurants_algeriens',
+        companies: 'entreprises_industrielles',
+        boutiques: 'boutiques_algeriennes'
+      };
+      
+      link.setAttribute("download", `${catNames[currentCategory]}_filtre.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function copyTSV() {
+      const data = filteredData;
+      if (data.length === 0) return;
+
+      const headers = Object.keys(data[0]);
+      let tsvText = headers.join("\t") + "\n";
+
+      data.forEach(item => {
+        tsvText += headers.map(h => item[h] || "").join("\t") + "\n";
+      });
+
+      navigator.clipboard.writeText(tsvText).then(() => {
+        alert("Données copiées dans le presse-papiers au format TSV ! Prêt à être collé dans Excel.");
+      }).catch(err => {
+        console.error("Impossible de copier", err);
+      });
+    }
+
+    // Launch UI
+    window.onload = init;
+  </script>
+</body>
+</html>
